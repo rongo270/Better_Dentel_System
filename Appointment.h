@@ -11,6 +11,9 @@ typedef struct {
     int Time;
 } Appointment;
 
+Appointment* CreateAppointment(int docotrID, int patientID, Date DOA, int time);
+
+char* ToStringAppointment(Appointment* appointment);
 
 
 #endif 

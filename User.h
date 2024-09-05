@@ -18,5 +18,9 @@ typedef struct {
 void init_user(User* user, int id, const char* password, const char* name, Date dob);
 void add_appointment(User* user, Appointment* appointment);
 void free_user(User* user);
+char* user_details_to_string(const User* user);
+void delete_appointment(User* currentUser, int appointID);
+char** show_appointments(User* currentUser);
+bool is_appoinement_in(User* currentUser, Date date, int time);
 
 #endif

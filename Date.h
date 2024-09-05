@@ -9,9 +9,9 @@ typedef struct {
     int year;
 } Date;
 
-bool ValidateDate(int month, int Day);
-
-
 char* ToString(Date date);
+
+
+bool ValidateDate(int month, int Day);
 
 #endif // DATE_H
