@@ -13,5 +13,96 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\pages">
+      <UniqueIdentifier>{84b102aa-242d-4ad7-b30d-c6b532d5fb11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\List">
+      <UniqueIdentifier>{a878c964-37a8-47bc-905f-515f43c57da8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Structs">
+      <UniqueIdentifier>{a98417bb-8128-4503-9e60-17ae53e9a679}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Binery">
+      <UniqueIdentifier>{8e7f40b4-886d-44b8-adcf-97690097f76e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Appointment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildStart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Date.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Doctor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Patient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadBinery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Text_Appointments.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WriteBinery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PatientList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AdminPage.c">
+      <Filter>Source Files\pages</Filter>
+    </ClCompile>
+    <ClCompile Include="DoctorPage.c">
+      <Filter>Source Files\pages</Filter>
+    </ClCompile>
+    <ClCompile Include="log-in.c">
+      <Filter>Source Files\pages</Filter>
+    </ClCompile>
+    <ClCompile Include="PatientPage.c">
+      <Filter>Source Files\pages</Filter>
+    </ClCompile>
+    <ClCompile Include="sign-up.c">
+      <Filter>Source Files\pages</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>Source Files\pages</Filter>
+    </ClCompile>
+    <ClCompile Include="Appointment.c">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildStart.c">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="Date.c">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="Doctor.c">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="Patient.c">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="Text_Appointments.c">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="ReadBinery.c">
+      <Filter>Source Files\Binery</Filter>
+    </ClCompile>
+    <ClCompile Include="WriteBinery.c">
+      <Filter>Source Files\Binery</Filter>
+    </ClCompile>
+    <ClCompile Include="User.c">
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
