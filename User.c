@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "user.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -5,8 +6,8 @@
 
 void init_user(User* user, int id, const char* password, const char* name, Date dob) {
     user->ID = id;
-    user->Password = strdup(password);  // Dynamically allocate memory for the password
-    user->Name = strdup(name);  // Dynamically allocate memory for the name
+    user->Password = _strdup(password);  // Use _strdup instead of strdup
+    user->Name = _strdup(name);  // Use _strdup instead of strdup
     user->DOB = dob;
     user->Appointments = NULL;
     user->numberOfAppointments = 0;
@@ -130,7 +131,7 @@ char** show_appointments(User* currentUser) {
 
 }
 
-bool is_appoinement_In(User* currentUser, Date date, int time) {
+bool is_appoinement_in(User* currentUser, Date date, int time){
     for (int i = 0; i < currentUser->numberOfAppointments; i++) {
         if (currentUser->Appointments[i]->DateOfAppointment.year == date.year &&
             currentUser->Appointments[i]->DateOfAppointment.day == date.day &&

@@ -1,7 +1,7 @@
 #ifndef APPOINTMENT_H
 #define APPOINTMENT_H
 
-#include "date.h"
+#include "Date.h"
 
 typedef struct {
     int AppointmentID;

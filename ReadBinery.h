@@ -1,16 +1,16 @@
-#ifndef READ_BINERY_H
-#define READ_BINERY_H
+#ifndef READ_BINARY_FILE_H
+#define READ_BINARY_FILE_H
 
-#include "Doctor.h"
+#include "doctor.h"
+#include "patient.h"
 
+// Define the ReadBinary struct to hold the doctors and patients arrays
 typedef struct {
     Doctor** doctors;
     Patient** patients;
-}ReadBinery;
+} ReadBinary;
 
+// Function to read doctors, patients, and appointments from a binary file
+int ReadBinaryFile(ReadBinary* data);
 
-int ReadBinaryFile(Doctor*** doctors, Patient*** patients);
-int ReadBinaryData(Doctor*** doctors, Patient*** patients);
-
-
-#endif // !READ_BINERY_H
+#endif // READ_BINARY_FILE_H

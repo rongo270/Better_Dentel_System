@@ -1,13 +1,13 @@
-#ifndef APPOINTMENTLIST_H
-#define APPOINTMENTLIST_H
+#ifndef PARIENTLIST_H
+#define PARIENTLIST_H
 
-#include "appointment.h"
+#include "Patient.h"
 
 typedef struct PatientList {
     struct PatientList* Before;
-    PatientList* appointment;
+    Patient* patient;
     struct PatientList* Next;
-} AppointmentList;
+} PatientList;
 
 PatientList* createAppointmentList(Appointment* appointment);
 

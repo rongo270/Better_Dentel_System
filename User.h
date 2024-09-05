@@ -1,7 +1,7 @@
 #ifndef USER_H
 #define USER_H
 
-#include "date.h"
+#include "Date.h"
 #include "appointment.h"
 
 // Common struct for both Doctor and Patient

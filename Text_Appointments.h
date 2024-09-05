@@ -1,14 +1,14 @@
 #ifndef TEXT_APPOINTMENTS_H
 #define TEXT_APPOINTMENTS_H
 
-#include "Patient.h"
+#include "User.h"
 
 typedef struct {
-    Patient* patient;
+    User* currentUser;
     char* Text_name;
 } Text_Appointments;
 
-Text_Appointments CreatAndPrint(Patient patient, char* Text_Name);
+Text_Appointments CreatAndPrint(User* currentUser, char* Text_Name);
 
 
 
