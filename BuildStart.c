@@ -34,6 +34,7 @@ void initializeBuild(BuildStart* build) {
     build->doctors[0]->userInfo.DOB.month = 1;
     build->doctors[0]->userInfo.DOB.year = 1970;
     build->doctors[0]->userInfo.Appointments = NULL;  // No appointments yet
+    build->doctors[0]->userInfo.numberOfAppointments = 0;
     build->doctors[0]->patientList = NULL;   // No patients yet
     build->doctors[0]->PatientCounter = 0;
 
@@ -48,6 +49,7 @@ void initializeBuild(BuildStart* build) {
     build->doctors[1]->userInfo.DOB.month = 2;
     build->doctors[1]->userInfo.DOB.year = 1975;
     build->doctors[1]->userInfo.Appointments = NULL;  // No appointments yet
+    build->doctors[1]->userInfo.numberOfAppointments = 0;
     build->doctors[1]->patientList = NULL;   // No patients yet
     build->doctors[1]->PatientCounter = 0;
 
@@ -62,6 +64,7 @@ void initializeBuild(BuildStart* build) {
     build->doctors[2]->userInfo.DOB.month = 3;
     build->doctors[2]->userInfo.DOB.year = 1904;
     build->doctors[2]->userInfo.Appointments = NULL;  // No appointments yet
+    build->doctors[2]->userInfo.numberOfAppointments = 0;
     build->doctors[2]->patientList = NULL;   // No patients yet
     build->doctors[2]->PatientCounter = 0;
 

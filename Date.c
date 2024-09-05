@@ -18,3 +18,12 @@ char* ToString(Date date) {
 
     return dateString;  // Return the formatted string
 }
+
+bool ValidateDate(int month, int day) {
+    int daysInMonth[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    if (day<1 || day>daysInMonth[month - 1]) {
+        return false;
+    }
+    return true;
+
+}

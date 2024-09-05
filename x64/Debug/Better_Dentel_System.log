@@ -1,10 +1,4 @@
-﻿  User.c
-  WriteBinery.c
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\WriteBinery.c(42,53): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\WriteBinery.c(47,58): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\WriteBinery.c(58,22): warning C4047: 'initializing': 'PatientList *' differs in levels of indirection from 'PatientList **'
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\WriteBinery.c(62,77): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\WriteBinery.c(94,53): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\WriteBinery.c(99,58): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Generating Code...
+﻿  log-in.c
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\log-in.c(30,36): warning C4047: 'function': 'const char *' differs in levels of indirection from 'int'
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\log-in.c(30,32): warning C4024: 'strcmp': different types for formal and actual parameter 2
   Better_Dentel_System.vcxproj -> C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\x64\Debug\Better_Dentel_System.exe

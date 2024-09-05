@@ -11,6 +11,6 @@ typedef struct {
 } ReadBinary;
 
 // Function to read doctors, patients, and appointments from a binary file
-int ReadBinaryFile(ReadBinary* data);
+int ReadBinaryFile(Doctor*** doctors, Patient*** patients);
 
 #endif // READ_BINARY_FILE_H
