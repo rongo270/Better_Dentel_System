@@ -50,7 +50,7 @@ char* user_details_to_string(const User* user) {
     char* dobString = ToString(user->DOB);
 
     // Estimate the size of the resulting string
-    int size = snprintf(NULL, 0, "ID: %d\nPassword: %s\nName: %s\nDate of Birth: %s\n",
+    int size = snprintf(NULL, 0, "ID: %d, Password: %s, Name: %s, Date of Birth: %s\n",
         user->ID, user->Password, user->Name, dobString);
 
     // Allocate memory for the resulting string (+1 for the null terminator)
@@ -62,7 +62,7 @@ char* user_details_to_string(const User* user) {
     }
 
     // Create the formatted string
-    sprintf(result, "ID: %d\nPassword: %s\nName: %s\nDate of Birth: %s\n",
+    sprintf(result, "ID: %d, Password: %s, Name: %s, Date of Birth: %s\n",
         user->ID, user->Password, user->Name, dobString);
 
     // Free the temporary date string
@@ -120,7 +120,7 @@ void delete_appointment(User* currentUser, int appointID) {
 }
 
 char** show_appointments(User* currentUser) {
-    if (currentUser->numberOfAppointments != 0) {
+    if (currentUser != NULL && currentUser->numberOfAppointments != 0) {
         char** AppointmentsDetiles = malloc(sizeof(currentUser->numberOfAppointments) * sizeof(char*));
         for (int i = 0; i < currentUser->numberOfAppointments; i++) {
             AppointmentsDetiles[i] = ToStringAppointment(currentUser->Appointments[i]);
@@ -141,4 +141,19 @@ bool is_appoinement_in(User* currentUser, Date date, int time){
         }
     }
     return false;
+}
+
+bool TimeIsClear(User* currentUser, Date date, int time) {
+    if (currentUser != NULL) {
+        for (int i = 0; currentUser->Appointments[i] != NULL && i < currentUser->numberOfAppointments; i++) {
+            if (currentUser->Appointments[i]->DateOfAppointment.year == date.year &&
+                currentUser->Appointments[i]->DateOfAppointment.day == date.day &&
+                currentUser->Appointments[i]->Time == time &&
+                currentUser->Appointments[i]->DateOfAppointment.month == date.month) {
+                return false;
+            }
+        }
+    }
+    return false;
+
 }

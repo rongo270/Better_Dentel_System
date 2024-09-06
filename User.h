@@ -22,5 +22,6 @@ char* user_details_to_string(const User* user);
 void delete_appointment(User* currentUser, int appointID);
 char** show_appointments(User* currentUser);
 bool is_appoinement_in(User* currentUser, Date date, int time);
+bool TimeIsClear(User* currentUser, Date date, int time);
 
 #endif

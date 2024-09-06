@@ -1,4 +1,6 @@
-﻿  log-in.c
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\log-in.c(30,36): warning C4047: 'function': 'const char *' differs in levels of indirection from 'int'
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\log-in.c(30,32): warning C4024: 'strcmp': different types for formal and actual parameter 2
+﻿  PatientPage.c
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(34,46): warning C4133: 'function': incompatible types - from 'Patient *' to 'const User *'
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(103,42): warning C4133: 'function': incompatible types - from 'Patient *' to 'User *'
+  User.c
+  Generating Code...
   Better_Dentel_System.vcxproj -> C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\x64\Debug\Better_Dentel_System.exe

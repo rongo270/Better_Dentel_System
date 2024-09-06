@@ -1,8 +1,10 @@
-#include "Patient.h"
-#include "Doctor.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "Patient.h"
+#include "Doctor.h"
+#include "WriteBinery.h"
 
 void sign_up(Patient** patients);
 void PatientPage(Patient* currantPatient, Doctor** doctors, Patient** patients);
@@ -21,6 +23,7 @@ void log_in(Patient** patients, Doctor** doctors) {
 
 		if (id == 0) {
 			sign_up(patients);
+			WriteBinaryFile(doctors, patients);
 			//printf("plase enter your id - ");
 			//scanf_s("%d", &id);
 		}
@@ -41,7 +44,8 @@ void log_in(Patient** patients, Doctor** doctors) {
 					while (count < 5) {
 						scanf_s("%49s", password, (unsigned)_countof(password));
 						if (strcmp(password, patients[i]->userInfo.Password) == 0) {
-							printf("\nlog in complate\n");
+							system("cls");//i think its cool
+							printf("log in complate\n");
 							PatientPage(patients[i], doctors, patients);
 						}
 						else if (count != 5) {
@@ -61,6 +65,7 @@ void log_in(Patient** patients, Doctor** doctors) {
 						while (count < 5) {
 							scanf_s("%49s", password, (unsigned)_countof(password));
 							if (strcmp(password, doctors[i]->userInfo.Password) == 0) {
+								system("cls");
 								printf("\nlog in complate\n");
 								DoctorPage(doctors[i], patients, doctors);
 							}
