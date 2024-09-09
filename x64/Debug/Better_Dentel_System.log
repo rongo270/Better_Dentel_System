@@ -1,10 +1,4 @@
-﻿  PatientPage.c
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(35,46): warning C4133: 'function': incompatible types - from 'Patient *' to 'const User *'
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(41,34): warning C4133: 'function': incompatible types - from 'Patient *' to 'User *'
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(173,29): warning C4133: 'function': incompatible types - from 'Doctor *' to 'User *'
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(174,33): warning C4133: 'function': incompatible types - from 'Patient *' to 'User *'
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(177,42): warning C4133: 'function': incompatible types - from 'Patient *' to 'User *'
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(177,94): warning C4133: 'function': incompatible types - from 'Doctor *' to 'User *'
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(215,43): warning C4133: 'function': incompatible types - from 'Doctor *' to 'User *'
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(219,28): warning C4133: 'function': incompatible types - from 'Patient *' to 'User *'
+﻿  User.c
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\User.c(190,9): warning C4033: 'EnterAppointment' must return a value
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\User.c(193,24): warning C4133: '=': incompatible types - from 'User **' to 'Appointment **'
   Better_Dentel_System.vcxproj -> C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\x64\Debug\Better_Dentel_System.exe

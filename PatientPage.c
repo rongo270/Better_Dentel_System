@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//#include "Patient.h"
 #include "Text_Appointments.h"
 #include "User.h"
 #include "Doctor.h"
@@ -13,7 +12,7 @@ void PrintStringArray(char** strArray);
 void PrintAllAppointments(User* currentUser);
 void ScheduleNewAppointment(Patient* currentPatient, Doctor** doctors);
 void cancelAppointment(Patient* currentPatient, Doctor** doctors);
-//void buildFile(Patient currentPatient);
+void buildFile(User currentUser);
 void log_in(Patient** patients, Doctor** doctors);
 
 void PatientPage(Patient* currentPatient, Doctor** doctors, Patient** patients) {
@@ -51,7 +50,7 @@ void PatientPage(Patient* currentPatient, Doctor** doctors, Patient** patients) 
             break;
 
         case 5:
-            //buildFile(*currentPatient);
+            buildFile(currentPatient->userInfo);
             break;
 
         case 6:
@@ -116,14 +115,14 @@ void ScheduleNewAppointment(Patient* currentPatient, Doctor** doctors) {
     int year, month, day, time, docNum;
     bool check = false;
     printf("Which docotor would you like to make an appointment with? (write the number)\n ");
-    int i = 0;
-    while (i < 3) {
-        printf("%d. %s\n", i + 1, doctors[i]->userInfo.Name);
-        i++;
+    int in = 0;
+    while (in < 3) {
+        printf("%d. %s\n", in + 1, doctors[in]->userInfo.Name);
+        in++;
     }
     while (!check) {
         scanf_s("%d", &docNum);
-        if (docNum > i + 1 || docNum < 1) {
+        if (docNum > in + 1 || docNum < 1) {
             printf("\ninvalide number, enter again: ");
         }
         else {
@@ -164,6 +163,7 @@ void ScheduleNewAppointment(Patient* currentPatient, Doctor** doctors) {
 
                     Appointment* newAppointment = CreateAppointment(selectedDoctor->userInfo.ID, currentPatient->userInfo.ID, selectedDate, time);
                     if (EnterAppointment(currentPatient, newAppointment) && EnterAppointment(selectedDoctor, newAppointment)) {
+                        EnterPatient(selectedDoctor, currentPatient);
                         printf("appointment was created sucssfuly");
                         check = true;
                     }
@@ -209,5 +209,26 @@ void cancelAppointment(Patient* currentPatient, Doctor** doctors) {
     }
     else {
         printf("no appointment to cancel");
+    }
+}
+
+void buildFile(User currentUser) {
+    if (currentUser.numberOfAppointments != 0) {
+        const int Max_Len = 50;
+        char* nameOfFile = (char*)malloc(Max_Len * sizeof(char));  // Allocate memory for the file name
+
+        if (nameOfFile == NULL) {
+            perror("Failed to allocate memory for file name");
+            return; // Exit if memory allocation fails
+        }
+
+        printf("Enter the name of the file you wish to have: ");
+        scanf_s("%s", nameOfFile, Max_Len);
+        CreatAndPrint(currentUser, nameOfFile);
+
+        free(nameOfFile); // Free the allocated memory
+    }
+    else {
+        printf("\n dont have any appointment, so no file was made");
     }
 }

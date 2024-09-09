@@ -5,10 +5,10 @@
 #include <string.h>
 
 // Function to create a text file and print the user details and appointments
-Text_Appointments CreatAndPrint(User* currentUser, char* Text_Name) {
+Text_Appointments CreatAndPrint(User currentUser, char* Text_Name) {
     // Initialize the Text_Appointments struct
     Text_Appointments textAppointments;
-    textAppointments.currentUser = currentUser;
+    textAppointments.currentUser = &currentUser;
     textAppointments.Text_name = Text_Name;
 
     // Create and open the file for writing (append mode)
@@ -21,15 +21,15 @@ Text_Appointments CreatAndPrint(User* currentUser, char* Text_Name) {
 
     // Write user (doctor or patient) details to the file
     fprintf(file, "User ID: %d\nName: %s\nDate of Birth: %02d/%02d/%04d\n\n",
-        currentUser->ID,
-        currentUser->Name,
-        currentUser->DOB.day,
-        currentUser->DOB.month,
-        currentUser->DOB.year);
+        currentUser.ID,
+        currentUser.Name,
+        currentUser.DOB.day,
+        currentUser.DOB.month,
+        currentUser.DOB.year);
 
     // Write each appointment to the file (if any)
-    for (int i = 0; i < currentUser->numberOfAppointments; i++) {
-        char* appointmentStr = ToStringAppointment(currentUser->Appointments[i]);
+    for (int i = 0; i < currentUser.numberOfAppointments; i++) {
+        char* appointmentStr = ToStringAppointment(currentUser.Appointments[i]);
         if (appointmentStr != NULL) {
             fprintf(file, "%s\n", appointmentStr);
             free(appointmentStr);  // Free the string after writing it to the file

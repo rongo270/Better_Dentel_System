@@ -148,6 +148,7 @@
     <ClCompile Include="log-in.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="Patient.c" />
+    <ClCompile Include="PatientList.c" />
     <ClCompile Include="PatientPage.c" />
     <ClCompile Include="ReadBinery.c" />
     <ClCompile Include="sign-up.c" />

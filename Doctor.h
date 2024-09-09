@@ -13,5 +13,7 @@ typedef struct {
 } Doctor;
 
 void init_doctor(Doctor* doctor, int id, const char* password, const char* name, Date dob);
+bool EnterPatient(Doctor* doctor, Patient* patient);
+char** ShowList(Doctor currentDoctor);
 
 #endif

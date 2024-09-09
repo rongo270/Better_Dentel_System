@@ -66,7 +66,7 @@ void log_in(Patient** patients, Doctor** doctors) {
 							scanf_s("%49s", password, (unsigned)_countof(password));
 							if (strcmp(password, doctors[i]->userInfo.Password) == 0) {
 								system("cls");
-								printf("\nlog in complate\n");
+								printf("log in complate\n");
 								DoctorPage(doctors[i], patients, doctors);
 							}
 							else if (count != 5) {

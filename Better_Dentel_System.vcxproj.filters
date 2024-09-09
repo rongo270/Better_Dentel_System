@@ -104,5 +104,8 @@
     <ClCompile Include="User.c">
       <Filter>Source Files\Structs</Filter>
     </ClCompile>
+    <ClCompile Include="PatientList.c">
+      <Filter>Source Files\List</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

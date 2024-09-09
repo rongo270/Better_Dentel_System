@@ -32,6 +32,11 @@ void DoctorPage(Doctor* currentDoctor, Patient** patients, Doctor** doctors) {
             PrintAllAppointments(currentDoctor);
             break;
         case 3:
+            PatientChar = ShowList(*currentDoctor);
+            PrintStringArray(PatientChar);
+            free(PatientChar);
+            break;
+        case 4:
             log_in(patients, doctors);
             break;
 
@@ -47,5 +52,6 @@ void DoctorPage(Doctor* currentDoctor, Patient** patients, Doctor** doctors) {
 void Doctormenu() {
     printf("1. View Details\n");
     printf("2. View Appoinemnts\n");
-    printf("3. Log out\n");
+    printf("3. Print All Patients\n");
+    printf("4. Log out\n");
 }

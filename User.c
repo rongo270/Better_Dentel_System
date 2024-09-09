@@ -48,6 +48,10 @@ void free_user(User* user) {
 char* user_details_to_string(const User* user) {
     // Convert the Date of Birth to a string
     char* dobString = ToString(user->DOB);
+    if (dobString == NULL) {
+        printf("Failed to convert Date of Birth to string.\n");
+        return NULL; // Handle this case gracefully
+    }
 
     // Estimate the size of the resulting string
     int size = snprintf(NULL, 0, "ID: %d, Password: %s, Name: %s, Date of Birth: %s\n",
@@ -157,8 +161,9 @@ bool is_appoinement_in(User* currentUser, Date date, int time){
 }
 
 bool TimeIsClear(User* currentUser, Date date, int time) {
-    if (currentUser != NULL) {
-        for (int i = 0; currentUser->Appointments[i] != NULL && i < currentUser->numberOfAppointments; i++) {
+    if (currentUser->Appointments != NULL) {
+        // i have no idie why when i enter here i = to 1
+        for (int i = 0; (currentUser->Appointments[i] != NULL && i < currentUser->numberOfAppointments); i++) {
             if (currentUser->Appointments[i]->DateOfAppointment.year == date.year &&
                 currentUser->Appointments[i]->DateOfAppointment.day == date.day &&
                 currentUser->Appointments[i]->Time == time &&
@@ -231,7 +236,7 @@ void CancelAppointments(User* user, int appointID) {
     else {
         // If no appointments left, free the array and set it to NULL
         user->Appointments[0] = NULL;
-        free(user->Appointments);
         //user->Appointments = NULL;
+        //free(user->Appointments);
     }
 }

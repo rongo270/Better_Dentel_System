@@ -8,7 +8,7 @@ typedef struct {
     char* Text_name;
 } Text_Appointments;
 
-Text_Appointments CreatAndPrint(User* currentUser, char* Text_Name);
+Text_Appointments CreatAndPrint(User currentUser, char* Text_Name);
 
 
 
