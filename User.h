@@ -23,5 +23,8 @@ void delete_appointment(User* currentUser, int appointID);
 char** show_appointments(User* currentUser);
 bool is_appoinement_in(User* currentUser, Date date, int time);
 bool TimeIsClear(User* currentUser, Date date, int time);
+bool EnterAppointment(User* user, Appointment* appointment);
+void CancelAppointments(User* user, int appointID);
+
 
 #endif

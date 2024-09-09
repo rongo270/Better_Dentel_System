@@ -120,15 +120,28 @@ void delete_appointment(User* currentUser, int appointID) {
 }
 
 char** show_appointments(User* currentUser) {
-    if (currentUser != NULL && currentUser->numberOfAppointments != 0) {
-        char** AppointmentsDetiles = malloc(sizeof(currentUser->numberOfAppointments) * sizeof(char*));
+    if (currentUser != NULL && currentUser->numberOfAppointments > 0) {
+        // Correct memory allocation: Allocate space for char* pointers
+        char** AppointmentsDetiles = (char**)malloc(currentUser->numberOfAppointments * sizeof(char*));
+        if (AppointmentsDetiles == NULL) {
+            // Memory allocation failure handling
+            return NULL;
+        }
+
         for (int i = 0; i < currentUser->numberOfAppointments; i++) {
             AppointmentsDetiles[i] = ToStringAppointment(currentUser->Appointments[i]);
+            AppointmentsDetiles[i + 1] = NULL;
+            if (AppointmentsDetiles[i] == NULL) {
+                for (int j = 0; j < i + 1; j++) {
+                    free(AppointmentsDetiles[j]);
+                }
+                free(AppointmentsDetiles);
+                return NULL;
+            }
         }
         return AppointmentsDetiles;
     }
     return NULL;
-
 }
 
 bool is_appoinement_in(User* currentUser, Date date, int time){
@@ -154,6 +167,71 @@ bool TimeIsClear(User* currentUser, Date date, int time) {
             }
         }
     }
-    return false;
+    return true;
 
+}
+
+bool EnterAppointment(User* user, Appointment* appointment) {
+    User** newAppoinmentArray;
+    if (user->numberOfAppointments != 0) {
+        newAppoinmentArray = (User**)realloc(user->Appointments, (user->numberOfAppointments + 1) * sizeof(Appointment*));
+    }
+    else {
+        newAppoinmentArray = (User**)malloc(sizeof(Appointment**));
+    }
+    if (newAppoinmentArray == NULL) {
+        //memory check
+        return false;
+        return;
+    }
+
+    user->Appointments = newAppoinmentArray;
+
+    user->Appointments[user->numberOfAppointments] = appointment;
+
+    user->numberOfAppointments = user->numberOfAppointments + 1;
+    
+    return true;
+}
+
+void CancelAppointments(User* user, int appointID) {
+    if (user == NULL || user->numberOfAppointments == 0) {
+        return;
+    }
+
+    int place = -1;//find the place with the ID in the array
+    for (int i = 0; i < user->numberOfAppointments; i++) {
+        if (user->Appointments[i]->AppointmentID == appointID) {
+            place = i;
+            break;
+        }
+    }
+
+    if (place == -1) {
+        return;//not found
+    }
+
+    free(user->Appointments[place]);
+
+    for (int i = place; i < user->numberOfAppointments - 1; i++) {
+        user->Appointments[place] = user->Appointments[user->numberOfAppointments - 1];
+    }
+
+    user->numberOfAppointments--;
+
+    // Resize the appointments array or free if no appointments left
+    if (user->numberOfAppointments > 0) {
+        Appointment** temp = (Appointment**)realloc(user->Appointments, user->numberOfAppointments * sizeof(Appointment*));
+        if (temp == NULL) {
+            // If realloc fails, just leave the original array as is
+            return;
+        }
+        user->Appointments = temp;
+    }
+    else {
+        // If no appointments left, free the array and set it to NULL
+        user->Appointments[0] = NULL;
+        free(user->Appointments);
+        //user->Appointments = NULL;
+    }
 }

@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "Doctor.h"
+#include "User.h"
 
 
 void Doctormenu();
@@ -22,20 +23,13 @@ void DoctorPage(Doctor* currentDoctor, Patient** patients, Doctor** doctors) {
 
         switch (choice) {
         case 1:
-            //details = ViewDoctorDetails(currentDoctor);
-            //PrintStringDoc(details);
-            //free(details);
+            details = user_details_to_string(currentDoctor);
+            PrintString(details);
+            free(details);
             break;
 
         case 2:
-            //PatientChar = ViewPatients(currentDoctor);
-            //PrintStringArrayDoc(PatientChar);
-            //if (PatientChar != NULL) {
-            //    for (int i = 0; PatientChar[i] != NULL; i++) {
-            //        free(PatientChar[i]); // Free each string in the array
-            //    }
-            //    free(PatientChar); // Free the array itself
-            //}
+            PrintAllAppointments(currentDoctor);
             break;
         case 3:
             log_in(patients, doctors);
@@ -52,6 +46,6 @@ void DoctorPage(Doctor* currentDoctor, Patient** patients, Doctor** doctors) {
 
 void Doctormenu() {
     printf("1. View Details\n");
-    printf("2. View Patients\n");
+    printf("2. View Appoinemnts\n");
     printf("3. Log out\n");
 }

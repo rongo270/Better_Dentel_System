@@ -10,7 +10,7 @@ void log_in(Patient** patients, Doctor** doctors);
 
 int main() {
 
-    printf("Hello and welcome to gggthe Dental System\n");
+    printf("Hello and welcome to gggthe Dental Systemss\n");
 
     const char* filename = "BineryCode.bin";
     FILE* file = fopen(filename, "rb");

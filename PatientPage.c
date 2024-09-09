@@ -5,17 +5,18 @@
 #include "Text_Appointments.h"
 #include "User.h"
 #include "Doctor.h"
+#include "WriteBinery.h"
 
 void Patientmenu();
 void PrintString(const char* str);
 void PrintStringArray(char** strArray);
-void PrintAllAppointments(Patient* currentPatient);
-//void ScheduleNewAppointment(Patient* currentPatient, Doctor** doctors);
-//void cancelAppointment(Patient* currentPatient, Doctor** doctors);
+void PrintAllAppointments(User* currentUser);
+void ScheduleNewAppointment(Patient* currentPatient, Doctor** doctors);
+void cancelAppointment(Patient* currentPatient, Doctor** doctors);
 //void buildFile(Patient currentPatient);
 void log_in(Patient** patients, Doctor** doctors);
 
-void PatientPage(Patient* currentPatient, Doctor** doctors, Patient** paitnets) {
+void PatientPage(Patient* currentPatient, Doctor** doctors, Patient** patients) {
     int choice = 0;
     int count = 0;
     char* details;
@@ -41,11 +42,12 @@ void PatientPage(Patient* currentPatient, Doctor** doctors, Patient** paitnets) 
             break;
 
         case 3:
-            //ScheduleNewAppointment(currentPatient, doctors);
+            ScheduleNewAppointment(currentPatient, doctors);
+            WriteBinaryFile(doctors, patients);
             break;
 
         case 4:
-           // cancelAppointment(currentPatient, doctors);
+           cancelAppointment(currentPatient, doctors);
             break;
 
         case 5:
@@ -53,7 +55,7 @@ void PatientPage(Patient* currentPatient, Doctor** doctors, Patient** paitnets) 
             break;
 
         case 6:
-            log_in(paitnets, doctors);
+            log_in(patients, doctors);
             break;
 
         default:
@@ -86,24 +88,24 @@ void PrintString(const char* str) {
 }
 
 void PrintStringArray(char** strArray) {
-    if (strArray == NULL) {
+    if (strArray == NULL || strArray[0] == NULL) {
         printf("Array is empty.\n");
         return;
     }
 
     for (int i = 0; strArray[i] != NULL; i++) {
         if (strArray[i] != NULL) {
-            printf("%s\n", strArray[i]);
+            PrintString(strArray[i]);
         }
     }
 }
 
-void PrintAllAppointments(Patient* currentPatient) {
+void PrintAllAppointments(User* currentUser) {
     char** appointmentsChar;
-    appointmentsChar = show_appointments(currentPatient);
+    appointmentsChar = show_appointments(currentUser);
     PrintStringArray(appointmentsChar);
     if (appointmentsChar != NULL) {
-        for (int i = 0; i < currentPatient->userInfo.numberOfAppointments; i++) {
+        for (int i = 0; i < currentUser->numberOfAppointments; i++) {
             free(appointmentsChar[i]);  // Free each string in the array
         }
         //free(appointmentsChar);  // Free the array itself
@@ -157,24 +159,55 @@ void ScheduleNewAppointment(Patient* currentPatient, Doctor** doctors) {
 
         // Check if the time is valid
         if (time >= 0 && time <= 23) {
-            if ( TimeIsClear(selectedDoctor,selectedDate,time) == true) {
-                printf("doctor already got a appointment in this time, please enter another time: ");
-            }
-            else if (TimeIsClear(currentPatient, selectedDate, time) == true) {
-                printf("you already got an appointment in this time, please enter another time: ");
+            if (TimeIsClear(selectedDoctor, selectedDate, time)) {
+                if (TimeIsClear(currentPatient, selectedDate, time)) {
+
+                    Appointment* newAppointment = CreateAppointment(selectedDoctor->userInfo.ID, currentPatient->userInfo.ID, selectedDate, time);
+                    if (EnterAppointment(currentPatient, newAppointment) && EnterAppointment(selectedDoctor, newAppointment)) {
+                        printf("appointment was created sucssfuly");
+                        check = true;
+                    }
+                    else {
+                        printf("error got made while entering the appointments");
+                        printf("\nInvalid time, enter again (0-23): ");
+                        check = true;
+                    }
+                }
+                else {
+                    printf("you already have an appointment in that data and time\n");
+                    printf("\nInvalid time, enter again (0-23): ");
+                }
             }
             else {
-                check = true;
+                printf("the doctor already have an appointment in that data and time");
+                printf("\nInvalid time, enter again (0-23): ");
             }
         }
-        else {
-            printf("\nInvalid time, enter again (0-23): ");
-        }
     }
+}
 
-    EnterAPatient(selectedDoctor, currentPatient);
-    Appointment* newAppointment = CreateAppointment(selectedDoctor->ID, currentPatient->ID, selectedDate, time);
-    EnterAppointmentToDoctor(selectedDoctor, newAppointment);
-    EnterAppointmentToPatient(currentPatient, newAppointment);
-    printf("\n appointment was made\n");
+void cancelAppointment(Patient* currentPatient, Doctor** doctors) {
+    if (currentPatient->userInfo.numberOfAppointments != 0) {
+        int number, appointID;
+        for (int i = 0; i < currentPatient->userInfo.numberOfAppointments; i++) {
+            printf("%d. %s\n", i + 1, ToStringAppointment(currentPatient->userInfo.Appointments[i]));
+        }
+        printf("enter the number of the appointment you wish to cancel: ");
+        scanf_s("%d", &number);
+        while (number < 1 || number > currentPatient->userInfo.numberOfAppointments) {
+            printf("\nworng input, enter again: ");
+            scanf_s("%d", &number);
+        }
+        appointID = currentPatient->userInfo.Appointments[number - 1]->AppointmentID;
+        for (int i = 0; doctors[i] != NULL; i++) {
+            if (doctors[i]->userInfo.ID == currentPatient->userInfo.Appointments[number - 1]->DoctorID) {
+                CancelAppointments(doctors[i], appointID);
+                break;
+            }
+        }
+        CancelAppointments(currentPatient, appointID);//may cuese problem becaz free
+    }
+    else {
+        printf("no appointment to cancel");
+    }
 }
