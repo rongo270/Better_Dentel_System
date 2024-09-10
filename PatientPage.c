@@ -165,9 +165,6 @@ void ScheduleNewAppointment(Patient* currentPatient, Doctor** doctors) {
                     Appointment* newAppointment = CreateAppointment(selectedDoctor->userInfo.ID, currentPatient->userInfo.ID, selectedDate, time);
                     if (EnterAppointment(currentPatient, newAppointment) && EnterAppointment(selectedDoctor, newAppointment)) {
                         EnterPatient(selectedDoctor, currentPatient->userInfo.ID);
-                        printf("\n\ndoctor list id is - %d\n\n", selectedDoctor->patientList->patientID);
-                        printf("patient id? %d\n", currentPatient->userInfo.ID);
-                        printf("num of pateints %d and number of appoint %d", selectedDoctor->PatientCounter,selectedDoctor->userInfo.numberOfAppointments);
                         printf("appointment was created sucssfuly");
                         check = true;
                     }

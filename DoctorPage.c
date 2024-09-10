@@ -6,9 +6,7 @@
 
 void Doctormenu();
 void log_in(Patient** patients, Doctor** doctors);
-//void PrintStringArrayDoc(char** strArray);
-//void PrintStringDoc(const char* str);
-//void PrintStringArray(char** strArray);
+void printList(Doctor* currentDoctor, Patient** patients);
 
 
 void DoctorPage(Doctor* currentDoctor, Patient** patients, Doctor** doctors) {
@@ -32,9 +30,7 @@ void DoctorPage(Doctor* currentDoctor, Patient** patients, Doctor** doctors) {
             PrintAllAppointments(currentDoctor);
             break;
         case 3:
-            //PatientChar = ShowList(*currentDoctor);
-            //PrintStringArray(PatientChar);
-            //free(PatientChar);
+            printList(currentDoctor,patients);
             break;
         case 4:
             log_in(patients, doctors);
@@ -54,4 +50,26 @@ void Doctormenu() {
     printf("2. View Appoinemnts\n");
     printf("3. Print All Patients\n");
     printf("4. Log out\n");
+}
+
+void printList(Doctor* currentDoctor, Patient** patients) {
+    int counter;
+    char* details;
+    PatientList* header = currentDoctor->patientList; 
+
+    while (header != NULL) {
+        counter = 0; 
+
+        while (patients[counter] != NULL) {
+            if (patients[counter]->userInfo.ID == header->patientID) {
+                details = user_details_to_string(patients[counter]);
+                PrintString(details);
+                free(details);  
+                break; 
+            }
+            counter++; 
+        }
+
+        header = header->Next;
+    }
 }

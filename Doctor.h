@@ -14,6 +14,5 @@ typedef struct {
 
 void init_doctor(Doctor* doctor, int id, const char* password, const char* name, Date dob);
 void EnterPatient(Doctor* doctor, int patientID);
-char** ShowList(Doctor currentDoctor);
 
 #endif

@@ -42,33 +42,3 @@ void EnterPatient(Doctor* doctor, int patientID) {
         current = current->Next;
     }
 }
-
-//char** ShowList(Doctor currentDoctor) {
-//    PatientList* header = currentDoctor.patientList;
-//    char** newPatientsArray = NULL;
-//    if (header != NULL) {
-//        int count = 0;
-//    newPatientsArray = (char**)malloc((currentDoctor.PatientCounter + 1) * sizeof(char*));
-//    if (newPatientsArray == NULL) {
-//        return NULL;//memory fail
-//    }
-//
-//        while (header!=NULL)
-//        {
-//            newPatientsArray[count] = user_details_to_string(&header->patient->userInfo);
-//            if (newPatientsArray[count] == NULL) {
-//                // Free already allocated memory in case of failure
-//                for (int i = 0; i < count; i++) {
-//                    free(newPatientsArray[i]);
-//                }
-//                free(newPatientsArray);//memory fail
-//                return NULL;
-//            }
-//
-//            header = header->Next;
-//            count++;
-//        }
-//        newPatientsArray[count] = NULL;//make sure the list dont return again
-//    }
-//    return newPatientsArray;
-//}

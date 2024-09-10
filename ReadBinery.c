@@ -36,7 +36,6 @@ int ReadBinaryFile(Doctor*** doctors, Patient*** patients) {
         fread(&(*doctors)[i]->userInfo.ID, sizeof(int), 1, file);
 
         // Debug: print doctor info being read
-        printf("Reading Doctor ID: %d\n", (*doctors)[i]->userInfo.ID);
 
         // Read doctor's name
         fread(&nameLen, sizeof(int), 1, file);
@@ -53,9 +52,6 @@ int ReadBinaryFile(Doctor*** doctors, Patient*** patients) {
 
         // Read the number of patients the doctor has
         fread(&(*doctors)[i]->PatientCounter, sizeof(int), 1, file);
-
-        // Debug: print number of patients being read
-        printf("Reading %d patients for Doctor ID: %d\n", (*doctors)[i]->PatientCounter, (*doctors)[i]->userInfo.ID);
 
         // Create the patient list for the doctor
         PatientList* head = NULL;
@@ -75,9 +71,6 @@ int ReadBinaryFile(Doctor*** doctors, Patient*** patients) {
             // Read patient's ID in the list
             fread(&newPatientNode->patientID, sizeof(int), 1, file);
 
-            // Debug: print patient ID being read
-            printf("Reading patient ID: %d for Doctor ID: %d\n", newPatientNode->patientID, (*doctors)[i]->userInfo.ID);
-
             tail = newPatientNode;
         }
         (*doctors)[i]->patientList = head;  // Assign the head of the patient list
@@ -85,8 +78,6 @@ int ReadBinaryFile(Doctor*** doctors, Patient*** patients) {
         // Read the number of appointments the doctor has
         fread(&appointmentCount, sizeof(int), 1, file);
 
-        // Debug: print number of appointments being read
-        printf("Reading %d appointments for Doctor ID: %d\n", appointmentCount, (*doctors)[i]->userInfo.ID);
 
         (*doctors)[i]->userInfo.numberOfAppointments = appointmentCount;
         (*doctors)[i]->userInfo.Appointments = (Appointment**)malloc((appointmentCount + 1) * sizeof(Appointment*));  // +1 for NULL
@@ -114,8 +105,6 @@ int ReadBinaryFile(Doctor*** doctors, Patient*** patients) {
         // Read patient ID
         fread(&(*patients)[i]->userInfo.ID, sizeof(int), 1, file);
 
-        // Debug: print patient info being read
-        printf("Reading Patient ID: %d\n", (*patients)[i]->userInfo.ID);
 
         // Read patient's name
         fread(&nameLen, sizeof(int), 1, file);
@@ -134,8 +123,6 @@ int ReadBinaryFile(Doctor*** doctors, Patient*** patients) {
         fread(&appointmentCount, sizeof(int), 1, file);
         (*patients)[i]->userInfo.numberOfAppointments = appointmentCount;
 
-        // Debug: print number of appointments for the patient
-        printf("Reading %d appointments for Patient ID: %d\n", appointmentCount, (*patients)[i]->userInfo.ID);
 
         (*patients)[i]->userInfo.Appointments = (Appointment**)malloc((appointmentCount + 1) * sizeof(Appointment*));  // +1 for NULL
 
