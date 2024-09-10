@@ -1,10 +1,2 @@
-﻿  PatientPage.c
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(34,46): warning C4133: 'function': incompatible types - from 'Patient *' to 'const User *'
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(40,34): warning C4133: 'function': incompatible types - from 'Patient *' to 'User *'
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(162,29): warning C4133: 'function': incompatible types - from 'Doctor *' to 'User *'
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(163,33): warning C4133: 'function': incompatible types - from 'Patient *' to 'User *'
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(166,42): warning C4133: 'function': incompatible types - from 'Patient *' to 'User *'
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(166,94): warning C4133: 'function': incompatible types - from 'Doctor *' to 'User *'
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(205,43): warning C4133: 'function': incompatible types - from 'Doctor *' to 'User *'
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(210,28): warning C4133: 'function': incompatible types - from 'Patient *' to 'User *'
+﻿  Doctor.c
   Better_Dentel_System.vcxproj -> C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\x64\Debug\Better_Dentel_System.exe

@@ -5,11 +5,11 @@
 
 typedef struct PatientList {
     struct PatientList* Before;
-    Patient* patient;
+    int patientID;
     struct PatientList* Next;
 } PatientList;
 
-PatientList* createAppointmentList(Appointment* appointment);
+PatientList* createPatientList(int patientID);
 
 
 #endif // APPOINTMENT_LIST_H

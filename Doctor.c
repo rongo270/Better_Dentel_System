@@ -8,57 +8,67 @@ void init_doctor(Doctor* doctor, int id, const char* password, const char* name,
 }
 
 
-bool EnterPatient(Doctor* doctor, Patient* patient) {
-    //can be added here TimeCheck but its been check befor enter
+void EnterPatient(Doctor* doctor, int patientID) {
+    // Create a new PatientList node
+    PatientList* newPatient = createPatientList(patientID);
+    if (newPatient == NULL) {
+        return; // Memory allocation failed
+    }
 
-    PatientList* temp = createAppointmentList(patient);//new appoinmentList made
-    PatientList* first = doctor->patientList;//holds header of the doctorList
-    if (doctor->patientList != NULL)
-    {
-        PatientList* header = first;
-        while (header->Next != NULL && header->Next->patient->userInfo.ID != patient->userInfo.ID)
-        {
-            header = header->Next;//reach the date and time that is after the date and time its sreaching
+    // If the doctor's patient list is empty, assign the new patient as the head
+    if (doctor->patientList == NULL) {
+        doctor->patientList = newPatient;
+        doctor->PatientCounter++;
+        return;
+    }
+
+    // Traverse the list to check for duplicates and find the end of the list
+    PatientList* current = doctor->patientList;
+    while (current != NULL) {
+        if (current->patientID == patientID) {
+            // Patient already exists, free the newly allocated node
+            free(newPatient);
+            return; // No need to insert, patient is already in the list
         }
 
-        //even if its NULL it will be ok
-        temp->Next = header->Next;//enter between
-        temp->Before = header;
-
-        doctor->patientList = first;
-
-        return true;
-    }
-    doctor->patientList = temp;
-    return false;
-}
-
-char** ShowList(Doctor currentDoctor) {
-    PatientList* header = currentDoctor.patientList;
-    char** newPatientsArray = NULL;
-    if (header != NULL) {
-        int count = 0;
-    newPatientsArray = (char**)malloc((currentDoctor.PatientCounter + 1) * sizeof(char*));
-    if (newPatientsArray == NULL) {
-        return NULL;//memory fail
-    }
-
-        while (header!=NULL)
-        {
-            newPatientsArray[count] = user_details_to_string(&header->patient->userInfo);
-            if (newPatientsArray[count] == NULL) {
-                // Free already allocated memory in case of failure
-                for (int i = 0; i < count; i++) {
-                    free(newPatientsArray[i]);
-                }
-                free(newPatientsArray);//memory fail
-                return NULL;
-            }
-
-            header = header->Next;
-            count++;
+        // Move to the next node if available
+        if (current->Next == NULL) {
+            // We're at the end of the list, insert the new patient here
+            current->Next = newPatient;
+            newPatient->Before = current;
+            doctor->PatientCounter++;
+            return;
         }
-        newPatientsArray[count] = NULL;//make sure the list dont return again
+        current = current->Next;
     }
-    return newPatientsArray;
 }
+
+//char** ShowList(Doctor currentDoctor) {
+//    PatientList* header = currentDoctor.patientList;
+//    char** newPatientsArray = NULL;
+//    if (header != NULL) {
+//        int count = 0;
+//    newPatientsArray = (char**)malloc((currentDoctor.PatientCounter + 1) * sizeof(char*));
+//    if (newPatientsArray == NULL) {
+//        return NULL;//memory fail
+//    }
+//
+//        while (header!=NULL)
+//        {
+//            newPatientsArray[count] = user_details_to_string(&header->patient->userInfo);
+//            if (newPatientsArray[count] == NULL) {
+//                // Free already allocated memory in case of failure
+//                for (int i = 0; i < count; i++) {
+//                    free(newPatientsArray[i]);
+//                }
+//                free(newPatientsArray);//memory fail
+//                return NULL;
+//            }
+//
+//            header = header->Next;
+//            count++;
+//        }
+//        newPatientsArray[count] = NULL;//make sure the list dont return again
+//    }
+//    return newPatientsArray;
+//}

@@ -109,12 +109,12 @@ void freeBuild(BuildStart* build) {
             }
 
             // Free each doctor's patient list if any
-            if (build->doctors[i]->patientList != NULL) {
-                for (int j = 0; j < build->doctors[i]->PatientCounter; j++) {
-                    free(build->doctors[i]->patientList[j]);
-                }
-                free(build->doctors[i]->patientList);
-            }
+            //if (build->doctors[i]->patientList != NULL) {
+            //    for (int j = 0; j < build->doctors[i]->PatientCounter; j++) {
+            //        free(build->doctors[i]->patientList[j]);
+            //    }
+            //    free(build->doctors[i]->patientList);
+            //}
 
             free(build->doctors[i]); // Free the doctor itself
         }

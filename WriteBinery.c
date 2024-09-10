@@ -35,6 +35,8 @@ void WriteBinaryFile(Doctor** doctors, Patient** patients) {
     for (int i = 0; i < doctorCountBinery; i++) {
         Doctor* doc = doctors[i];
 
+        // Debug: print info being written
+
         // Write doctor ID
         fwrite(&doc->userInfo.ID, sizeof(int), 1, file);
 
@@ -57,13 +59,9 @@ void WriteBinaryFile(Doctor** doctors, Patient** patients) {
         // Write each patient in the doctor's patient list
         PatientList* currentPatient = doc->patientList;
         while (currentPatient != NULL) {
-            fwrite(&currentPatient->patient->userInfo.ID, sizeof(int), 1, file);
+            fwrite(&currentPatient->patientID, sizeof(int), 1, file);
 
-            int patNameLen = strlen(currentPatient->patient->userInfo.Name) + 1;  // Renamed variable to avoid shadowing
-            fwrite(&patNameLen, sizeof(int), 1, file);
-            fwrite(currentPatient->patient->userInfo.Name, sizeof(char), patNameLen, file);
-
-            fwrite(&currentPatient->patient->userInfo.DOB, sizeof(Date), 1, file);
+            // Debug: print patient ID being written
 
             currentPatient = currentPatient->Next;
         }
@@ -71,6 +69,8 @@ void WriteBinaryFile(Doctor** doctors, Patient** patients) {
         // Write the number of appointments for the doctor
         int appointmentCount = doc->userInfo.numberOfAppointments;
         fwrite(&appointmentCount, sizeof(int), 1, file);
+
+        // Debug: print number of appointments being written
 
         // Write each appointment
         for (int j = 0; j < appointmentCount; j++) {
@@ -90,6 +90,8 @@ void WriteBinaryFile(Doctor** doctors, Patient** patients) {
         // Write patient ID
         fwrite(&pat->userInfo.ID, sizeof(int), 1, file);
 
+        // Debug: print patient info being written
+
         // Write patient's name
         int patNameLen = strlen(pat->userInfo.Name) + 1;
         fwrite(&patNameLen, sizeof(int), 1, file);
@@ -105,6 +107,8 @@ void WriteBinaryFile(Doctor** doctors, Patient** patients) {
 
         // Write the number of appointments for the patient
         fwrite(&pat->userInfo.numberOfAppointments, sizeof(int), 1, file);
+
+        // Debug: print number of appointments for patient
 
         // Write each appointment
         for (int j = 0; j < pat->userInfo.numberOfAppointments; j++) {

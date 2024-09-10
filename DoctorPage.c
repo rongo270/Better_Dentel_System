@@ -32,9 +32,9 @@ void DoctorPage(Doctor* currentDoctor, Patient** patients, Doctor** doctors) {
             PrintAllAppointments(currentDoctor);
             break;
         case 3:
-            PatientChar = ShowList(*currentDoctor);
-            PrintStringArray(PatientChar);
-            free(PatientChar);
+            //PatientChar = ShowList(*currentDoctor);
+            //PrintStringArray(PatientChar);
+            //free(PatientChar);
             break;
         case 4:
             log_in(patients, doctors);
