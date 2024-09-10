@@ -6,80 +6,44 @@
 
 void init_user(User* user, int id, const char* password, const char* name, Date dob) {
     user->ID = id;
-    user->Password = _strdup(password);  // Use _strdup instead of strdup
-    user->Name = _strdup(name);  // Use _strdup instead of strdup
+    user->Password = _strdup(password);
+    user->Name = _strdup(name);
     user->DOB = dob;
     user->Appointments = NULL;
     user->numberOfAppointments = 0;
 }
 
-void add_appointment(User* user, Appointment* appointment) {
-    if (user->numberOfAppointments == 0) {
-        // First appointment: use malloc
-        user->Appointments = malloc(sizeof(Appointment*) * 2);  // Allocate for 1 appointment and 1 NULL slot
-        if (user->Appointments == NULL) {
-            printf("Error: Memory allocation failed.\n");
-            exit(EXIT_FAILURE);  // Exit if memory allocation fails
-        }
-    }
-    else {
-        // Subsequent appointments: use realloc
-        user->Appointments = realloc(user->Appointments, sizeof(Appointment*) * (user->numberOfAppointments + 2));
-        if (user->Appointments == NULL) {
-            printf("Error: Memory reallocation failed.\n");
-            exit(EXIT_FAILURE);  // Exit if memory allocation fails
-        }
-    }
-
-    user->Appointments[user->numberOfAppointments] = appointment;
-    user->Appointments[user->numberOfAppointments + 1] = NULL;
-    user->numberOfAppointments++;
-}
-
-void free_user(User* user) {
-    free(user->Password);
-    free(user->Name);
-    for (int i = 0; i < user->numberOfAppointments; i++) {
-        free(user->Appointments[i]);
-    }
-    free(user->Appointments);
-}
 
 char* user_details_to_string(const User* user) {
-    // Convert the Date of Birth to a string
+    //Data of birth to string
     char* dobString = ToString(user->DOB);
     if (dobString == NULL) {
-        printf("Failed to convert Date of Birth to string.\n");
-        return NULL; // Handle this case gracefully
+        return NULL; //Memory fail
     }
 
-    // Estimate the size of the resulting string
+    //Fine buffer size
     int size = snprintf(NULL, 0, "ID: %d, Password: %s, Name: %s, Date of Birth: %s\n",
         user->ID, user->Password, user->Name, dobString);
 
-    // Allocate memory for the resulting string (+1 for the null terminator)
     char* result = (char*)malloc(size + 1);
 
     if (result == NULL) {
-        printf("Memory allocation failed.\n");
-        exit(1); // Exit if memory allocation fails
+        return NULL; //Memory fails
     }
 
-    // Create the formatted string
     sprintf(result, "ID: %d, Password: %s, Name: %s, Date of Birth: %s\n",
         user->ID, user->Password, user->Name, dobString);
 
-    // Free the temporary date string
     free(dobString);
 
-    return result;  // Return the formatted string
+    return result;
 }
 
 
 void delete_appointment(User* currentUser, int appointID) {
     int found = -1;
 
-    // Search for the appointment with the specified appointID
+    //Search the appointment with the appointID
     for (int i = 0; i < currentUser->numberOfAppointments; i++) {
         if (currentUser->Appointments[i]->AppointmentID == appointID) {
             found = i;
@@ -87,54 +51,51 @@ void delete_appointment(User* currentUser, int appointID) {
         }
     }
 
-    // If the appointment is not found, return without doing anything
+    // if not found
     if (found == -1) {
         printf("Appointment with ID %d not found.\n", appointID);
         return;
     }
 
-    // If there is only one appointment, free it and set Appointments to NULL
+    //Only 1 appointment free and set to NULL
     if (currentUser->numberOfAppointments == 1) {
         free(currentUser->Appointments[0]);
-        free(currentUser->Appointments);  // Free the array itself
-        currentUser->Appointments = NULL; // Set to NULL
+        free(currentUser->Appointments);
+        currentUser->Appointments = NULL;
         currentUser->numberOfAppointments = 0;
-        printf("Appointment with ID %d deleted. No more appointments left.\n", appointID);
     }
-    else {
-        // There are multiple appointments: delete the found one and shift others
-        free(currentUser->Appointments[found]);  // Free the memory of the deleted appointment
+    else {//delete what was found and move the others
+        free(currentUser->Appointments[found]);
 
-        // Shift the remaining appointments to fill the gap
+        //Move
         for (int i = found; i < currentUser->numberOfAppointments - 1; i++) {
             currentUser->Appointments[i] = currentUser->Appointments[i + 1];
         }
 
-        // Resize the array to exclude the last (now empty) slot
+        //realloc the space
         currentUser->Appointments = realloc(currentUser->Appointments, sizeof(Appointment*) * (currentUser->numberOfAppointments - 1));
 
         if (currentUser->Appointments == NULL && currentUser->numberOfAppointments > 1) {
-            printf("Error reallocating memory.\n");
-            exit(1);
+            printf("Error relloc memory.\n");
+            return;
         }
 
         currentUser->numberOfAppointments--;
-        printf("Appointment with ID %d deleted. Remaining appointments: %d\n", appointID, currentUser->numberOfAppointments);
     }
 }
 
 char** show_appointments(User* currentUser) {
     if (currentUser->Appointments != NULL && currentUser->numberOfAppointments > 0) {
-        // Correct memory allocation: Allocate space for char* pointers
+        //Make space for appointments string
         char** AppointmentsDetiles = (char**)malloc(currentUser->numberOfAppointments * sizeof(char*));
         if (AppointmentsDetiles == NULL) {
-            // Memory allocation failure handling
+            //Memory fails
             return NULL;
         }
 
         for (int i = 0; i < currentUser->numberOfAppointments; i++) {
-            AppointmentsDetiles[i] = ToStringAppointment(currentUser->Appointments[i]);
-            AppointmentsDetiles[i + 1] = NULL;
+            AppointmentsDetiles[i] = ToStringAppointment(currentUser->Appointments[i]);//Put in the array
+            AppointmentsDetiles[i + 1] = NULL;//Makes the next NULL (alot of problems i had with that
             if (AppointmentsDetiles[i] == NULL) {
                 for (int j = 0; j < i + 1; j++) {
                     free(AppointmentsDetiles[j]);
@@ -148,21 +109,8 @@ char** show_appointments(User* currentUser) {
     return NULL;
 }
 
-bool is_appoinement_in(User* currentUser, Date date, int time){
-    for (int i = 0; i < currentUser->numberOfAppointments; i++) {
-        if (currentUser->Appointments[i]->DateOfAppointment.year == date.year &&
-            currentUser->Appointments[i]->DateOfAppointment.day == date.day &&
-            currentUser->Appointments[i]->Time == time &&
-            currentUser->Appointments[i]->DateOfAppointment.month == date.month) {
-            return true;
-        }
-    }
-    return false;
-}
-
 bool TimeIsClear(User* currentUser, Date date, int time) {
-    if (currentUser->Appointments != NULL) {
-        // i have no idie why when i enter here i = to 1
+    if (currentUser->Appointments != NULL) {//check if the appintment time is equel to another time
         for (int i = 0; (currentUser->Appointments[i] != NULL && i < currentUser->numberOfAppointments); i++) {
             if (currentUser->Appointments[i]->DateOfAppointment.year == date.year &&
                 currentUser->Appointments[i]->DateOfAppointment.day == date.day &&
@@ -178,7 +126,7 @@ bool TimeIsClear(User* currentUser, Date date, int time) {
 
 bool EnterAppointment(User* user, Appointment* appointment) {
     User** newAppoinmentArray;
-    if (user->numberOfAppointments != 0) {
+    if (user->numberOfAppointments != 0) {//Checks if its not the first appointment
         newAppoinmentArray = (User**)realloc(user->Appointments, (user->numberOfAppointments + 1) * sizeof(Appointment*));
     }
     else {
@@ -192,7 +140,7 @@ bool EnterAppointment(User* user, Appointment* appointment) {
 
     user->Appointments = newAppoinmentArray;
 
-    user->Appointments[user->numberOfAppointments] = appointment;
+    user->Appointments[user->numberOfAppointments] = appointment;//Puts the new appointment last
 
     user->numberOfAppointments = user->numberOfAppointments + 1;
     
@@ -204,7 +152,7 @@ void CancelAppointments(User* user, int appointID) {
         return;
     }
 
-    int place = -1;//find the place with the ID in the array
+    int place = -1;//Find the place with the ID in the array
     for (int i = 0; i < user->numberOfAppointments; i++) {
         if (user->Appointments[i]->AppointmentID == appointID) {
             place = i;
@@ -218,25 +166,23 @@ void CancelAppointments(User* user, int appointID) {
 
     free(user->Appointments[place]);
 
-    for (int i = place; i < user->numberOfAppointments - 1; i++) {
+    for (int i = place; i < user->numberOfAppointments - 1; i++) {//Move the appointment after it was found one step before
         user->Appointments[place] = user->Appointments[user->numberOfAppointments - 1];
     }
 
     user->numberOfAppointments--;
 
-    // Resize the appointments array or free if no appointments left
+    //Resize the appointments array or free it if not appointment found
     if (user->numberOfAppointments > 0) {
         Appointment** temp = (Appointment**)realloc(user->Appointments, user->numberOfAppointments * sizeof(Appointment*));
         if (temp == NULL) {
-            // If realloc fails, just leave the original array as is
+            //Memory fails
             return;
         }
         user->Appointments = temp;
     }
     else {
-        // If no appointments left, free the array and set it to NULL
+        //If no appointments left, set it to NULL
         user->Appointments[0] = NULL;
-        //user->Appointments = NULL;
-        //free(user->Appointments);
     }
 }

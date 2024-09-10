@@ -26,7 +26,7 @@ char* ToStringAppointment(Appointment* appointment) {
         return NULL;
     }
 
-    // Calculate the required buffer size
+    // Fine buffer size
     int bufferSize = snprintf(NULL, 0,
         "Appointment ID: %d,  Doctor ID: %d,  Patient ID: %d\nDate of Appointment: %02d/%02d/%04d,  Time: %02d:00\n",
         appointment->AppointmentID,
@@ -37,13 +37,12 @@ char* ToStringAppointment(Appointment* appointment) {
         appointment->DateOfAppointment.year,
         appointment->Time);
 
-    // Allocate the required memory (+1 for the null terminator)
-    char* result = (char*)malloc((bufferSize + 1) * sizeof(char));
+    char* result = (char*)malloc((bufferSize + 1) * sizeof(char));//Creat the string size (1 is for NULL)
     if (result == NULL) {//memory failure
         return NULL;
     }
 
-    // Populate the allocated buffer with the formatted string
+    // Put in string
     snprintf(result, bufferSize + 1,
         "Appointment ID: %d\nDoctor ID: %d\nPatient ID: %d\nDate of Appointment: %02d/%02d/%04d\nTime: %02d:00\n",
         appointment->AppointmentID,

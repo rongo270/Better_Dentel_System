@@ -5,10 +5,10 @@ void init_patient(Patient* patient, int id, const char* password, const char* na
     init_user(&(patient->userInfo), id, password, name, dob);
 }
 
-bool IDcheck(Patient** patients, int ID) {
+bool IDcheck(Patient** patients, int ID) {//Check if id already exists
     if (patients != NULL) {
         for (int i = 0; patients[i] != NULL; i++) {
-            if (patients[i]->userInfo.ID == ID) {
+            if (patients[i]->userInfo.ID == ID) {//If found retirn false
                 return false;
             }
         }
@@ -17,26 +17,26 @@ bool IDcheck(Patient** patients, int ID) {
 
 }
 
-void AddPatient(Patient*** patients, Patient* newPatient) {
+void AddPatient(Patient*** patients, Patient* newPatient) {//Add patient to list. gets an pointer to the Patient**
     if (newPatient == NULL) {
         return; //check if ok
     }
 
     int count = 0;
-    while ((*patients)[count] != NULL) {
+    while ((*patients)[count] != NULL) {//Finds the patients last place
         count++;
     }
-    Patient** temp = (Patient**)malloc((count + 2) * sizeof(Patient*));
+    Patient** temp = (Patient**)malloc((count + 2) * sizeof(Patient*));//Creat space (could use relloc but i didnt want)
     if (temp == NULL) {
-        return; // Memory check
+        return; //Memory check
     }
 
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < count; i++) {//Insert all
         temp[i] = (*patients)[i];
     }
 
-    temp[count] = newPatient;
-    temp[count + 1] = NULL;
+    temp[count] = newPatient;//Put in the new patient
+    temp[count + 1] = NULL;//after is NULL
     free(*patients);
     *patients = temp;
 

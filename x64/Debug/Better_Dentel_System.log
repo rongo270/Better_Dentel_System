@@ -1,2 +1,4 @@
-﻿  AdminPage.c
+﻿  User.c
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\User.c(151,9): warning C4033: 'EnterAppointment' must return a value
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\User.c(154,24): warning C4133: '=': incompatible types - from 'User **' to 'Appointment **'
   Better_Dentel_System.vcxproj -> C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\x64\Debug\Better_Dentel_System.exe

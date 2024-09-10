@@ -6,6 +6,7 @@
 #include "Patient.h"
 
 void Adminmenu();
+void log_in(Patient** patients, Doctor** doctors);
 void PrintAllUsers(void** users, int userCount, void (*printFunc)(void*));
 void SortAllUsers(void** users, int userCount, int (*compareFunc)(const void*, const void*));
 void* SearchAllUsers(void** users, int userCount, void* key, int (*compareFunc)(const void*, const void*));
@@ -58,7 +59,7 @@ void AdminPage(Patient** patients, Doctor** doctors) {
 
         case 2: { // Sort by ID, Name, or Password
             int sortChoice;
-            printf("Sort by: 1. ID 2. Name 3. Password: ");
+            printf("\nSort by: 1. ID 2. Name 3. Password: ");
             scanf("%d", &sortChoice);
             if (sortChoice == 1) {
                 SortAllUsers(allUsers, userCount, CompareByID);
@@ -80,7 +81,7 @@ void AdminPage(Patient** patients, Doctor** doctors) {
 
         case 3: { // Search by ID, Name, or Password
             int searchChoice;
-            printf("Search by: 1. ID 2. Name 3. Password: ");
+            printf("\nSearch by: 1. ID 2. Name 3. Password: ");
             scanf("%d", &searchChoice);
             void* result = NULL;
 
@@ -117,8 +118,8 @@ void AdminPage(Patient** patients, Doctor** doctors) {
             break;
         }
 
-        case 6:
-            printf("Logging out...\n");
+        case 4:
+            log_in(*patients, *doctors);
             break;
 
         default:
@@ -130,10 +131,10 @@ void AdminPage(Patient** patients, Doctor** doctors) {
 }
 
 void Adminmenu() {
-    printf("1. Print All Users\n");
+    printf("\n1. Print All Users\n");
     printf("2. Sort All Users by ID, Name, or Password\n");
     printf("3. Search All Users by ID, Name, or Password\n");
-    printf("6. Log out\n");
+    printf("4. Log out\n");
     printf("Your choice is: ");
 }
 

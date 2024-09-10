@@ -6,16 +6,16 @@
 
 
 char* ToString(Date dob) {
-    // Allocate memory for the date string (e.g., "DD/MM/YYYY")
-    char* dobString = (char*)malloc(11 * sizeof(char)); // Allocate 11 bytes for "DD/MM/YYYY" format + null terminator
+    //Memory for the date string DD/MM/YYYY and NULL
+    char* dobString = (char*)malloc(11 * sizeof(char));
     if (dobString == NULL) {
-        return NULL; // Handle memory allocation failure
+        return NULL; //Memory failure
     }
 
-    // Format the date as a string
+    //Format the date as a string
     snprintf(dobString, 11, "%02d/%02d/%04d", dob.day, dob.month, dob.year);
 
-    return dobString;  // Return dynamically allocated string
+    return dobString;  //Return dynamically allocated string
 }
 
 bool ValidateDate(int month, int day) {

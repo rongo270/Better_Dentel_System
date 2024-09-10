@@ -16,22 +16,29 @@ void buildFile(User currentUser);
 void log_in(Patient** patients, Doctor** doctors);
 
 void PatientPage(Patient* currentPatient, Doctor** doctors, Patient** patients) {
+   
     int choice = 0;
     int count = 0;
+
     char* details;
+
+
     printf("welcome to the Patient menu %s\n", currentPatient->userInfo.Name);
+
     Patientmenu();
+
     while (choice != 6)
     {
-        if (count == 3) {
+        if (count == 3) {//Every 3 tesks it will print menu again
             Patientmenu();
             count = 0;
         }
+
         scanf_s("%d", &choice);
 
         switch (choice) {
         case 1:
-            details = user_details_to_string(currentPatient);
+            details = user_details_to_string(currentPatient);//Makes a string of details
             PrintString(details);
             free(details);
             break;
@@ -42,12 +49,12 @@ void PatientPage(Patient* currentPatient, Doctor** doctors, Patient** patients) 
 
         case 3:
             ScheduleNewAppointment(currentPatient, doctors);
-            WriteBinaryFile(doctors, patients);
+            WriteBinaryFile(doctors, patients);//Update
             break;
 
         case 4:
            cancelAppointment(currentPatient, doctors);
-           WriteBinaryFile(doctors, patients);
+           WriteBinaryFile(doctors, patients);//Update
             break;
 
         case 5:
@@ -55,11 +62,11 @@ void PatientPage(Patient* currentPatient, Doctor** doctors, Patient** patients) 
             break;
 
         case 6:
-            log_in(patients, doctors);
+            log_in(patients, doctors);//Goes back to log in
             break;
 
         default:
-            //printf("Invalid choice. Please select a valid option.\n");
+
             break;
         }
         count++;
@@ -78,7 +85,7 @@ void Patientmenu() {
     printf("6. Log out\n");
 }
 
-void PrintString(const char* str) {
+void PrintString(const char* str) {//Print String
     if (str != NULL) {
         printf("%s\n", str);
     }
@@ -87,7 +94,7 @@ void PrintString(const char* str) {
     }
 }
 
-void PrintStringArray(char** strArray) {
+void PrintStringArray(char** strArray) {//Print array of strings
     if (strArray == NULL) {
         printf("Array is empty.\n");
         return;
@@ -102,28 +109,27 @@ void PrintStringArray(char** strArray) {
 
 void PrintAllAppointments(User* currentUser) {
     char** appointmentsChar;
-    appointmentsChar = show_appointments(currentUser);
+    appointmentsChar = show_appointments(currentUser);//Makes array of appointments strings
     PrintStringArray(appointmentsChar);
     if (appointmentsChar != NULL) {
         for (int i = 0; i < currentUser->numberOfAppointments; i++) {
-            free(appointmentsChar[i]);  // Free each string in the array
+            free(appointmentsChar[i]);
         }
-        //free(appointmentsChar);  // Free the array itself
     }
 }
 
 void ScheduleNewAppointment(Patient* currentPatient, Doctor** doctors) {
     int year, month, day, time, docNum;
     bool check = false;
-    printf("Which docotor would you like to make an appointment with? (write the number)\n ");
+    printf("Which docotor would you like to make an appointment with? (write the number)\n");
     int in = 0;
-    while (in < 3) {
+    while (in < 3) {//Print all the doctors
         printf("%d. %s\n", in + 1, doctors[in]->userInfo.Name);
         in++;
     }
     while (!check) {
         scanf_s("%d", &docNum);
-        if (docNum > in + 1 || docNum < 1) {
+        if (docNum > in + 1 || docNum < 1) {//Check if valiad
             printf("\ninvalide number, enter again: ");
         }
         else {
@@ -135,10 +141,11 @@ void ScheduleNewAppointment(Patient* currentPatient, Doctor** doctors) {
     Doctor* selectedDoctor = doctors[docNum - 1];
 
     check = false;
+
     printf("\nPlease enter the date you wish to make the appointment (YYYY MM DD):\n");
 
     while (!check) {
-        scanf_s("%d %d %d", &year, &month, &day);
+        scanf_s("%d %d %d", &year, &month, &day);//Scan date
 
         if (year >= 999 && year <= 9999 && ValidateDate(month, day)) {
             selectedDate.year = year;
@@ -152,6 +159,7 @@ void ScheduleNewAppointment(Patient* currentPatient, Doctor** doctors) {
     }
 
     check = false;
+
     printf("\nPlease enter the hour you would like to make the appointment:\n");
 
     while (!check) {
@@ -159,12 +167,12 @@ void ScheduleNewAppointment(Patient* currentPatient, Doctor** doctors) {
 
         // Check if the time is valid
         if (time >= 0 && time <= 23) {
-            if (TimeIsClear(selectedDoctor, selectedDate, time)) {
-                if (TimeIsClear(currentPatient, selectedDate, time)) {
+            if (TimeIsClear(selectedDoctor, selectedDate, time)) {//Check if doctor and patient dont have an 
+                if (TimeIsClear(currentPatient, selectedDate, time)) {//appointment in the same time
 
-                    Appointment* newAppointment = CreateAppointment(selectedDoctor->userInfo.ID, currentPatient->userInfo.ID, selectedDate, time);
-                    if (EnterAppointment(currentPatient, newAppointment) && EnterAppointment(selectedDoctor, newAppointment)) {
-                        EnterPatient(selectedDoctor, currentPatient->userInfo.ID);
+                    Appointment* newAppointment = CreateAppointment(selectedDoctor->userInfo.ID, currentPatient->userInfo.ID, selectedDate, time);// Creat appointment
+                    if (EnterAppointment(currentPatient, newAppointment) && EnterAppointment(selectedDoctor, newAppointment)) {//Enter appointment
+                        EnterPatient(selectedDoctor, currentPatient->userInfo.ID);//Enter patient to the list
                         printf("appointment was created sucssfuly");
                         check = true;
                     }
@@ -188,9 +196,9 @@ void ScheduleNewAppointment(Patient* currentPatient, Doctor** doctors) {
 }
 
 void cancelAppointment(Patient* currentPatient, Doctor** doctors) {
-    if (currentPatient->userInfo.numberOfAppointments != 0) {
+    if (currentPatient->userInfo.numberOfAppointments != 0) {//Check if has appointments
         int number, appointID;
-        for (int i = 0; i < currentPatient->userInfo.numberOfAppointments; i++) {
+        for (int i = 0; i < currentPatient->userInfo.numberOfAppointments; i++) {//Print all appointments
             printf("%d. %s\n", i + 1, ToStringAppointment(currentPatient->userInfo.Appointments[i]));
         }
         printf("enter the number of the appointment you wish to cancel: ");
@@ -200,22 +208,20 @@ void cancelAppointment(Patient* currentPatient, Doctor** doctors) {
             scanf_s("%d", &number);
         }
         appointID = currentPatient->userInfo.Appointments[number - 1]->AppointmentID;
-        for (int i = 0; doctors[i] != NULL; i++) {
+        for (int i = 0; doctors[i] != NULL; i++) {//Search the doctor
             if (doctors[i]->userInfo.ID == currentPatient->userInfo.Appointments[number - 1]->DoctorID) {
-                delete_appointment(doctors[i], appointID);
-                //CancelAppointments(doctors[i], appointID);
+                delete_appointment(doctors[i], appointID);//DELETE
                 break;
             }
         }
         delete_appointment(currentPatient, appointID);
-        //CancelAppointments(currentPatient, appointID);//may cuese problem becaz free
     }
     else {
         printf("no appointment to cancel");
     }
 }
 
-void buildFile(User currentUser) {
+void buildFile(User currentUser) {//Build file
     if (currentUser.numberOfAppointments != 0) {
         const int Max_Len = 50;
         char* nameOfFile = (char*)malloc(Max_Len * sizeof(char));  // Allocate memory for the file name

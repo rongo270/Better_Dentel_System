@@ -15,7 +15,7 @@ void DoctorPage(Doctor* currentDoctor, Patient** patients, Doctor** doctors) {
     char** PatientChar;
     printf("welcome to the Doctor menu %s\n", currentDoctor->userInfo.Name);
     Doctormenu();
-    while (choice != 5)
+    while (true)
     {
         scanf_s("%d", &choice);
 
@@ -52,16 +52,16 @@ void Doctormenu() {
     printf("4. Log out\n");
 }
 
-void printList(Doctor* currentDoctor, Patient** patients) {
+void printList(Doctor* currentDoctor, Patient** patients) {//Print the list of patient
     int counter;
     char* details;
-    PatientList* header = currentDoctor->patientList; 
+    PatientList* header = currentDoctor->patientList;
 
     while (header != NULL) {
         counter = 0; 
 
         while (patients[counter] != NULL) {
-            if (patients[counter]->userInfo.ID == header->patientID) {
+            if (patients[counter]->userInfo.ID == header->patientID) {//Prints the details until finish
                 details = user_details_to_string(patients[counter]);
                 PrintString(details);
                 free(details);  

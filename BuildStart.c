@@ -68,19 +68,19 @@ void initializeBuild(BuildStart* build) {
     build->doctors[2]->patientList = NULL;   // No patients yet
     build->doctors[2]->PatientCounter = 0;
 
-    // Mark the end of the doctors array
+    //Mark the end of the doctors array
     build->doctors[3] = NULL;
 }
 
 void freeBuild(BuildStart* build) {
-    // Free the patients
+    //Free the patients
     if (build->patients != NULL) {
-        // Free each patient's data
+        //Free patient data
         for (int i = 0; build->patients[i] != NULL; i++) {
             free(build->patients[i]->userInfo.Password);
             free(build->patients[i]->userInfo.Name);
 
-            // Free each patient's appointments if any
+            //Free each patient appointments
             if (build->patients[i]->userInfo.Appointments != NULL) {
                 for (int j = 0; j < build->patients[i]->userInfo.numberOfAppointments; j++) {
                     free(build->patients[i]->userInfo.Appointments[j]);
@@ -88,19 +88,19 @@ void freeBuild(BuildStart* build) {
                 free(build->patients[i]->userInfo.Appointments);
             }
 
-            free(build->patients[i]); // Free the patient itself
+            free(build->patients[i]); //Free the patient itself
         }
-        free(build->patients); // Free the patient array
+        free(build->patients); //Free the patient array
     }
 
-    // Free the doctors
+    //Free the doctors
     if (build->doctors != NULL) {
-        // Free each doctor's data
+        //Free each doctor data
         for (int i = 0; build->doctors[i] != NULL; i++) {
             free(build->doctors[i]->userInfo.Password);
             free(build->doctors[i]->userInfo.Name);
 
-            // Free each doctor's appointments if any
+            //Free each doctor appointments if any
             if (build->doctors[i]->userInfo.Appointments != NULL) {
                 for (int j = 0; build->doctors[i]->userInfo.Appointments[j] != NULL; j++) {
                     free(build->doctors[i]->userInfo.Appointments[j]);
@@ -108,16 +108,8 @@ void freeBuild(BuildStart* build) {
                 free(build->doctors[i]->userInfo.Appointments);
             }
 
-            // Free each doctor's patient list if any
-            //if (build->doctors[i]->patientList != NULL) {
-            //    for (int j = 0; j < build->doctors[i]->PatientCounter; j++) {
-            //        free(build->doctors[i]->patientList[j]);
-            //    }
-            //    free(build->doctors[i]->patientList);
-            //}
-
-            free(build->doctors[i]); // Free the doctor itself
+            free(build->doctors[i]); //Free doctor
         }
-        free(build->doctors); // Free the doctor array
+        free(build->doctors); //Free the doctor array
     }
 }

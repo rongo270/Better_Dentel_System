@@ -9,32 +9,30 @@ void init_doctor(Doctor* doctor, int id, const char* password, const char* name,
 
 
 void EnterPatient(Doctor* doctor, int patientID) {
-    // Create a new PatientList node
+    //Create a new PatientList node
     PatientList* newPatient = createPatientList(patientID);
     if (newPatient == NULL) {
-        return; // Memory allocation failed
+        return; //Memory allocation failed
     }
 
-    // If the doctor's patient list is empty, assign the new patient as the head
+    //If the doctor patient list is empty, assign the new patient as the head
     if (doctor->patientList == NULL) {
         doctor->patientList = newPatient;
         doctor->PatientCounter++;
         return;
     }
 
-    // Traverse the list to check for duplicates and find the end of the list
     PatientList* current = doctor->patientList;
     while (current != NULL) {
         if (current->patientID == patientID) {
-            // Patient already exists, free the newly allocated node
+            //Patient exists so leave
             free(newPatient);
-            return; // No need to insert, patient is already in the list
+            return;
         }
 
-        // Move to the next node if available
+        //Move until NULL
         if (current->Next == NULL) {
-            // We're at the end of the list, insert the new patient here
-            current->Next = newPatient;
+            current->Next = newPatient;//if he is in the end, insert the Patient
             newPatient->Before = current;
             doctor->PatientCounter++;
             return;

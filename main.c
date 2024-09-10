@@ -10,27 +10,25 @@ void log_in(Patient** patients, Doctor** doctors);
 
 int main() {
 
-    printf("Hello and welcome to gggthe Dental Systemss\n");
+    printf("Hello and welcome to the Dental Systems\n");
 
-    const char* filename = "BineryCode.bin";
+    const char* filename = "BineryCode.bin";//binery file
     FILE* file = fopen(filename, "rb");
 
     Doctor** doctors = NULL;
     Patient** patients = NULL;
 
-    if (file == NULL) {
+    if (file == NULL) {//if file was not found
         printf("This is your first time here, I will now create the system data for you.\n");
         BuildStart build;
-        initializeBuild(&build);
+        initializeBuild(&build);//Build the first variables
 
-        patients = build.patients;
+        patients = build.patients;//Initial the data into the variables
         doctors = build.doctors;
 
-        WriteBinaryFile(doctors, patients);
-        ReadBinaryFile(&doctors, &patients);//im having alot of problem and i dont know why if i dont read
-        //freeBuild(&build);
+        WriteBinaryFile(doctors, patients);//Make a new file with the data
     }
-    else {
+    else {//If file is found
         printf("Welcome back, data is now loaded from file.\n");
         fclose(file);
 
@@ -44,30 +42,6 @@ int main() {
     }
 
     log_in(patients, doctors);
-
-    // Free the allocated memory after usage
-    if (file == NULL) {
-        // Free memory only if it was allocated via BuildStart
-        freeBuild(&(BuildStart) { .doctors = doctors, .patients = patients });
-    }
-    else {
-        // Free memory if loaded from file
-        for (int i = 0; doctors[i] != NULL; i++) {
-            free(doctors[i]->userInfo.Password);
-            free(doctors[i]->userInfo.Name);
-            free(doctors[i]);
-        }
-        free(doctors);
-
-        for (int i = 0; patients[i] != NULL; i++) {
-            free(patients[i]->userInfo.Password);
-            free(patients[i]->userInfo.Name);
-            free(patients[i]);
-        }
-        free(patients);
-    }
-
-
 
     return 0;
 }
