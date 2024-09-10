@@ -9,7 +9,7 @@
 void sign_up(Patient** patients);
 void PatientPage(Patient* currantPatient, Doctor** doctors, Patient** patients);
 void DoctorPage(Doctor* currentDoctor, Patient** patients, Doctor** doctors);
-//void AdminPage(Patient** patients, Doctor** doctors);
+void AdminPage(Patient** patients, Doctor** doctors);
 
 void log_in(Patient** patients, Doctor** doctors) {
 	int count = 0;
@@ -30,10 +30,10 @@ void log_in(Patient** patients, Doctor** doctors) {
 
 		else if (id == 1) {//if you get wrong 1 time with the admin, you go back to log in
 			scanf_s("%49s", password, (unsigned)_countof(password));
-			if (strcmp(password, "0000" == 0)) {
-				printf("log in complate");
-				//AdminPage(patients, doctors);
-			}
+			//if (strcmp(password, "0000" == 0)) {
+				printf("log in complate\n");
+				AdminPage(patients, doctors);
+			//}
 
 		}
 
