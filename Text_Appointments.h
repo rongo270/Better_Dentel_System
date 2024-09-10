@@ -12,5 +12,5 @@ Text_Appointments CreatAndPrint(User currentUser, char* Text_Name);
 
 
 
-#endif // !TEXT_APPOINTMENTS_H
+#endif
 

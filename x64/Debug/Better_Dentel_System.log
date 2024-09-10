@@ -1,4 +1,45 @@
-﻿  User.c
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\User.c(151,9): warning C4033: 'EnterAppointment' must return a value
-C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\User.c(154,24): warning C4133: '=': incompatible types - from 'User **' to 'Appointment **'
+﻿  AdminPage.c
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\AdminPage.c(122,29): warning C4047: 'function': 'Patient **' differs in levels of indirection from 'Patient *'
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\AdminPage.c(122,20): warning C4024: 'log_in': different types for formal and actual parameter 1
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\AdminPage.c(122,39): warning C4047: 'function': 'Doctor **' differs in levels of indirection from 'Doctor *'
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\AdminPage.c(122,31): warning C4024: 'log_in': different types for formal and actual parameter 2
+  Appointment.c
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\Appointment.c(30,22): warning C4013: 'snprintf' undefined; assuming extern returning int
+  BuildStart.c
+  Date.c
+  Doctor.c
+  DoctorPage.c
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\DoctorPage.c(24,46): warning C4133: 'function': incompatible types - from 'Doctor *' to 'const User *'
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\DoctorPage.c(25,13): warning C4013: 'PrintString' undefined; assuming extern returning int
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\DoctorPage.c(30,13): warning C4013: 'PrintAllAppointments' undefined; assuming extern returning int
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\DoctorPage.c(15,12): warning C4101: 'PatientChar': unreferenced local variable
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\DoctorPage.c(65,58): warning C4133: 'function': incompatible types - from 'Patient *' to 'const User *'
+  Patient.c
+  PatientList.c
+  PatientPage.c
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(41,46): warning C4133: 'function': incompatible types - from 'Patient *' to 'const User *'
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(47,34): warning C4133: 'function': incompatible types - from 'Patient *' to 'User *'
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(170,29): warning C4133: 'function': incompatible types - from 'Doctor *' to 'User *'
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(171,33): warning C4133: 'function': incompatible types - from 'Patient *' to 'User *'
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(174,42): warning C4133: 'function': incompatible types - from 'Patient *' to 'User *'
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(174,94): warning C4133: 'function': incompatible types - from 'Doctor *' to 'User *'
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(213,43): warning C4133: 'function': incompatible types - from 'Doctor *' to 'User *'
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\PatientPage.c(217,28): warning C4133: 'function': incompatible types - from 'Patient *' to 'User *'
+  ReadBinery.c
+  Text_Appointments.c
+  User.c
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\User.c(138,9): warning C4033: 'EnterAppointment' must return a value
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\User.c(141,24): warning C4133: '=': incompatible types - from 'User **' to 'Appointment **'
+  WriteBinery.c
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\WriteBinery.c(42,53): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\WriteBinery.c(47,58): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\WriteBinery.c(86,53): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\WriteBinery.c(90,58): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  log-in.c
+  main.c
+  sign-up.c
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\sign-up.c(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\sign-up.c(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\sign-up.c(50,7): warning C4013: 'strlen' undefined; assuming extern returning int
+  Generating Code...
   Better_Dentel_System.vcxproj -> C:\Users\ayego\OneDrive\שולחן העבודה\השלמת פערים ב\8.20 מערכות\project\Better_Dentel_System\x64\Debug\Better_Dentel_System.exe

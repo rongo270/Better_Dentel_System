@@ -12,4 +12,4 @@ typedef struct PatientList {
 PatientList* createPatientList(int patientID);
 
 
-#endif // APPOINTMENT_LIST_H
+#endif

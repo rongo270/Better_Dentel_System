@@ -11,16 +11,16 @@ void PrintAllUsers(void** users, int userCount, void (*printFunc)(void*));
 void SortAllUsers(void** users, int userCount, int (*compareFunc)(const void*, const void*));
 void* SearchAllUsers(void** users, int userCount, void* key, int (*compareFunc)(const void*, const void*));
 
-// Functions to print a Doctor or a Patient
+//print
 void PrintDoctor(void* doctor);
 void PrintPatient(void* patient);
 
-// Comparison functions for sorting/searching by ID, Name, or Password
+//sort
 int CompareByID(const void* a, const void* b);
 int CompareByName(const void* a, const void* b);
 int CompareByPassword(const void* a, const void* b);
 
-// Search functions for searching by ID, Name, or Password
+//Search functions for by id, name or password
 void* SearchByID(void** users, int userCount, int id);
 void* SearchByName(void** users, int userCount, const char* name);
 void* SearchByPassword(void** users, int userCount, const char* password);
@@ -31,19 +31,19 @@ void AdminPage(Patient** patients, Doctor** doctors) {
     int userCount = 0;
     void** allUsers = NULL;
 
-    // Count the number of doctors and patients
+    //Count the number of doctors and patients
     while (doctors[doctorCount] != NULL) doctorCount++;
     while (patients[patientCount] != NULL) patientCount++;
     userCount = doctorCount + patientCount;
 
-    // Combine doctors and patients into a single array
+    //Combine the doctors and patients into a one big array
     allUsers = (void**)malloc(userCount * sizeof(void*));
 
     for (int i = 0; i < doctorCount; i++) {
-        allUsers[i] = (void*)doctors[i];  // Cast Doctor* to void*
+        allUsers[i] = (void*)doctors[i];  //Doctor* to void*
     }
     for (int i = 0; i < patientCount; i++) {
-        allUsers[doctorCount + i] = (void*)patients[i];  // Cast Patient* to void*
+        allUsers[doctorCount + i] = (void*)patients[i];//Cast Patient* to void*
     }
 
     do {
@@ -51,13 +51,13 @@ void AdminPage(Patient** patients, Doctor** doctors) {
         scanf("%d", &choice);
 
         switch (choice) {
-        case 1: // Print All Users
+        case 1: //Print All Users
             printf("Printing all users (Doctors and Patients):\n");
             PrintAllUsers(allUsers, doctorCount, PrintDoctor);
             PrintAllUsers((void**)(allUsers + doctorCount), patientCount, PrintPatient);
             break;
 
-        case 2: { // Sort by ID, Name, or Password
+        case 2: { //Sort by id name or password
             int sortChoice;
             printf("\nSort by: 1. ID 2. Name 3. Password: ");
             scanf("%d", &sortChoice);
@@ -79,7 +79,7 @@ void AdminPage(Patient** patients, Doctor** doctors) {
             break;
         }
 
-        case 3: { // Search by ID, Name, or Password
+        case 3: { //Search by id name or password
             int searchChoice;
             printf("\nSearch by: 1. ID 2. Name 3. Password: ");
             scanf("%d", &searchChoice);
@@ -110,7 +110,7 @@ void AdminPage(Patient** patients, Doctor** doctors) {
 
             if (result != NULL) {
                 printf("User found:\n");
-                PrintDoctor(result);  // Assuming it can be either Doctor or Patient
+                PrintDoctor(result); 
             }
             else {
                 printf("User not found.\n");
@@ -127,7 +127,7 @@ void AdminPage(Patient** patients, Doctor** doctors) {
         }
     } while (choice != 6);
 
-    free(allUsers);  // Free dynamically allocated memory
+    free(allUsers);
 }
 
 void Adminmenu() {
@@ -138,56 +138,56 @@ void Adminmenu() {
     printf("Your choice is: ");
 }
 
-// Print all users by calling the appropriate print function
+//Print all users
 void PrintAllUsers(void** users, int userCount, void (*printFunc)(void*)) {
     for (int i = 0; i < userCount; i++) {
-        printFunc(users[i]);  // Call the provided print function (Doctor or Patient)
+        printFunc(users[i]);  //Call the doctor or patient
     }
 }
 
-// Print Doctor details
+//Print doctor details
 void PrintDoctor(void* doctor) {
-    Doctor* doc = (Doctor*)doctor;  // Cast void* to Doctor*
+    Doctor* doc = (Doctor*)doctor;  //void* to doctor*
     char* details = user_details_to_string(&(doc->userInfo));
     printf("Doctor: %s\n", details);
     free(details);
 }
 
-// Print Patient details
+//Print patient details
 void PrintPatient(void* patient) {
-    Patient* pat = (Patient*)patient;  // Cast void* to Patient*
+    Patient* pat = (Patient*)patient;  //void* to Patient*
     char* details = user_details_to_string(&(pat->userInfo));
     printf("Patient: %s\n", details);
     free(details);
 }
 
-// Sort users using qsort by calling the appropriate comparison function
+//Sort users using qsort by compare function
 void SortAllUsers(void** users, int userCount, int (*compareFunc)(const void*, const void*)) {
     qsort(users, userCount, sizeof(void*), compareFunc);
 }
 
-// Compare users by ID (for sorting and searching)
+//Compare users by ID
 int CompareByID(const void* a, const void* b) {
     User* userA = *(User**)a;
     User* userB = *(User**)b;
     return (userA->ID - userB->ID);
 }
 
-// Compare users by Name (for sorting and searching)
+//Compare users by name
 int CompareByName(const void* a, const void* b) {
     User* userA = *(User**)a;
     User* userB = *(User**)b;
     return strcmp(userA->Name, userB->Name);
 }
 
-// Compare users by Password (for sorting and searching)
+//Compare users by password
 int CompareByPassword(const void* a, const void* b) {
     User* userA = *(User**)a;
     User* userB = *(User**)b;
     return strcmp(userA->Password, userB->Password);
 }
 
-// Search users by ID
+//Search users by ID
 void* SearchByID(void** users, int userCount, int id) {
     for (int i = 0; i < userCount; i++) {
         User* user = (User*)users[i];
@@ -198,7 +198,7 @@ void* SearchByID(void** users, int userCount, int id) {
     return NULL;
 }
 
-// Search users by Name
+//Search users by name
 void* SearchByName(void** users, int userCount, const char* name) {
     for (int i = 0; i < userCount; i++) {
         User* user = (User*)users[i];
@@ -209,7 +209,7 @@ void* SearchByName(void** users, int userCount, const char* name) {
     return NULL;
 }
 
-// Search users by Password
+//Search users by password
 void* SearchByPassword(void** users, int userCount, const char* password) {
     for (int i = 0; i < userCount; i++) {
         User* user = (User*)users[i];

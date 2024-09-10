@@ -2,13 +2,13 @@
 #define DOCTOR_H
 
 #include "user.h"
-#include "PatientList.h"  // Make sure this includes the definition of PatientList
-#include "date.h"         // Ensure Date is also included
+#include "PatientList.h"
+#include "date.h"
 
-// Doctor struct inherits from User
+
 typedef struct {
-    User userInfo;           // Common user details, including Appointments
-    PatientList* patientList; // List of patients specific to Doctor
+    User userInfo;
+    PatientList* patientList;
     int PatientCounter;
 } Doctor;
 

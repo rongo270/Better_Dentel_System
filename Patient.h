@@ -3,14 +3,13 @@
 
 #include "user.h"
 
-// Patient struct inherits from User
 typedef struct {
-    User userInfo;  // Common user details, including Appointments
+    User userInfo;
 } Patient;
 
 void init_patient(Patient* patient, int id, const char* password, const char* name, Date dob);
 bool IDcheck(Patient** patients, int ID);
-void AddPatient(Patient** patients, Patient* newPatient);
+void AddPatient(Patient*** patients, Patient* newPatient);
 
 
 #endif

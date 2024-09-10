@@ -12,7 +12,6 @@ typedef struct {
 } Appointment;
 
 Appointment* CreateAppointment(int docotrID, int patientID, Date DOA, int time);
-
 char* ToStringAppointment(Appointment* appointment);
 
 

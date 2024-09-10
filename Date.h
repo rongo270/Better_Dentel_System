@@ -14,4 +14,4 @@ char* ToString(Date date);
 
 bool ValidateDate(int month, int Day);
 
-#endif // DATE_H
+#endif
