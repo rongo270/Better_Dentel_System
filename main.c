@@ -27,6 +27,7 @@ int main() {
         doctors = build.doctors;
 
         WriteBinaryFile(doctors, patients);
+        ReadBinaryFile(&doctors, &patients);//im having alot of problem and i dont know why if i dont read
         //freeBuild(&build);
     }
     else {
@@ -34,7 +35,7 @@ int main() {
         fclose(file);
 
         if (ReadBinaryFile(&doctors, &patients) == 0) {
-
+            
         }
         else {
             printf("Failed to load data from file.\n");

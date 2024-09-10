@@ -22,8 +22,8 @@ void log_in(Patient** patients, Doctor** doctors) {
 		scanf_s("%d", &id);
 
 		if (id == 0) {
-			sign_up(patients);
-			WriteBinaryFile(doctors, patients);
+			sign_up(patients,doctors);
+			//WriteBinaryFile(doctors, patients);
 			//printf("plase enter your id - ");
 			//scanf_s("%d", &id);
 		}

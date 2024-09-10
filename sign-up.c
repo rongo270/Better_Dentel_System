@@ -1,10 +1,14 @@
 #include "Patient.h";
 #include <stdio.h>
 #include <stdlib.h>
+#include "Doctor.h";
+#include "WriteBinery.h"
 
 
+void log_in(Patient** patients, Doctor** doctors);
 
-void sign_up(Patient** patients) {
+
+void sign_up(Patient** patients,Doctor** doctors) {
 	const int Max_Len = 50;
 	const int Min_Password_Len = 3;
 	const int Min_Name_Len = 1;
@@ -89,8 +93,12 @@ void sign_up(Patient** patients) {
 
 	Patient* newPatient = (Patient*)malloc(sizeof(Patient));
 	init_patient(newPatient, id, password, name, DateOfBirth);
-	AddPatient(patients, newPatient);
+	AddPatient(&patients, newPatient);
+	printf("iddddd isss -- %d", patients[1]->userInfo.ID);
 	free(password);
 	free(name);
 	printf("Patient Made sucssfuly\n");
+	WriteBinaryFile(doctors, patients);
+	log_in(patients, doctors);
+	
 }

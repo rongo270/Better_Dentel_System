@@ -124,7 +124,7 @@ void delete_appointment(User* currentUser, int appointID) {
 }
 
 char** show_appointments(User* currentUser) {
-    if (currentUser != NULL && currentUser->numberOfAppointments > 0) {
+    if (currentUser->Appointments != NULL && currentUser->numberOfAppointments > 0) {
         // Correct memory allocation: Allocate space for char* pointers
         char** AppointmentsDetiles = (char**)malloc(currentUser->numberOfAppointments * sizeof(char*));
         if (AppointmentsDetiles == NULL) {

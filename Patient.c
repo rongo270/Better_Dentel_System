@@ -17,21 +17,27 @@ bool IDcheck(Patient** patients, int ID) {
 
 }
 
-void AddPatient(Patient** patients, Patient* newPatient) {
+void AddPatient(Patient*** patients, Patient* newPatient) {
     if (newPatient == NULL) {
         return; //check if ok
     }
 
-    // Find the size of the patient array
     int count = 0;
-    while (patients[count] != NULL) {
+    while ((*patients)[count] != NULL) {
         count++;
     }
-    Patient** temp = (Patient**)realloc(*patients, (count + 2) * sizeof(Patient*));
+    Patient** temp = (Patient**)malloc((count + 2) * sizeof(Patient*));
     if (temp == NULL) {
         return; // Memory check
     }
+
+    for (int i = 0; i < count; i++) {
+        temp[i] = (*patients)[i];
+    }
+
+    temp[count] = newPatient;
+    temp[count + 1] = NULL;
+    free(*patients);
     *patients = temp;
-    patients[count] = newPatient;
-    patients[count + 1] = NULL;
+
 }

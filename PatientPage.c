@@ -47,6 +47,7 @@ void PatientPage(Patient* currentPatient, Doctor** doctors, Patient** patients) 
 
         case 4:
            cancelAppointment(currentPatient, doctors);
+           WriteBinaryFile(doctors, patients);
             break;
 
         case 5:
@@ -87,7 +88,7 @@ void PrintString(const char* str) {
 }
 
 void PrintStringArray(char** strArray) {
-    if (strArray == NULL || strArray[0] == NULL) {
+    if (strArray == NULL) {
         printf("Array is empty.\n");
         return;
     }
@@ -163,7 +164,7 @@ void ScheduleNewAppointment(Patient* currentPatient, Doctor** doctors) {
 
                     Appointment* newAppointment = CreateAppointment(selectedDoctor->userInfo.ID, currentPatient->userInfo.ID, selectedDate, time);
                     if (EnterAppointment(currentPatient, newAppointment) && EnterAppointment(selectedDoctor, newAppointment)) {
-                        EnterPatient(selectedDoctor, currentPatient);
+                        //EnterPatient(selectedDoctor, currentPatient);
                         printf("appointment was created sucssfuly");
                         check = true;
                     }
@@ -201,11 +202,13 @@ void cancelAppointment(Patient* currentPatient, Doctor** doctors) {
         appointID = currentPatient->userInfo.Appointments[number - 1]->AppointmentID;
         for (int i = 0; doctors[i] != NULL; i++) {
             if (doctors[i]->userInfo.ID == currentPatient->userInfo.Appointments[number - 1]->DoctorID) {
-                CancelAppointments(doctors[i], appointID);
+                delete_appointment(doctors[i], appointID);
+                //CancelAppointments(doctors[i], appointID);
                 break;
             }
         }
-        CancelAppointments(currentPatient, appointID);//may cuese problem becaz free
+        delete_appointment(currentPatient, appointID);
+        //CancelAppointments(currentPatient, appointID);//may cuese problem becaz free
     }
     else {
         printf("no appointment to cancel");
