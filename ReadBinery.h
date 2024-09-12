@@ -11,5 +11,6 @@ typedef struct {
 
 
 int ReadBinaryFile(Doctor*** doctors, Patient*** patients);
+int ReadAppointmentID();
 
 #endif 

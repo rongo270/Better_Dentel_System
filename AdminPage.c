@@ -119,7 +119,7 @@ void AdminPage(Patient** patients, Doctor** doctors) {
         }
 
         case 4:
-            log_in(*patients, *doctors);
+            log_in(patients, doctors);
             break;
 
         default:

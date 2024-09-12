@@ -130,3 +130,39 @@ int ReadBinaryFile(Doctor*** doctors, Patient*** patients) {
     fclose(file);//close file
     return 0;
 }
+
+int ReadAppointmentID() {
+    const char* filename = "AppointmentBinery.bin";
+    FILE* file = fopen(filename, "rb");
+    int appointmentID = 1000;//First ID
+
+    if (file == NULL) {
+        file = fopen(filename, "wb");
+        if (file == NULL) {
+            return -1;//Error handle
+        }
+        fwrite(&appointmentID, sizeof(int), 1, file);
+        fclose(file);
+        return appointmentID;//Return the value 1000
+    }
+
+    //If file exists
+    fread(&appointmentID, sizeof(int), 1, file);
+    fclose(file);
+
+    //Increrss the ID
+    appointmentID++;
+
+    //Open the file again to write the updated ID
+    file = fopen(filename, "wb");
+    if (file == NULL) {
+        return -1;//Error handle opening file
+    }
+
+    //Write the updated ID back to the file
+    fwrite(&appointmentID, sizeof(int), 1, file);
+    fclose(file);
+
+    //Return the new appointment ID
+    return appointmentID;
+}

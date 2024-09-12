@@ -1,5 +1,7 @@
 #include "Appointment.h"
 #include <stdlib.h>
+#include "ReadBinery.h"
+#include "WriteBinery.h"
 
 
 Appointment* CreateAppointment(int doctorID, int patientID, Date DOA, int time) {
@@ -14,7 +16,9 @@ Appointment* CreateAppointment(int doctorID, int patientID, Date DOA, int time) 
     newAppointment->DateOfAppointment = DOA;
     newAppointment->Time = time;
 
-    static int nextAppointmentID = 1; // own ID
+    int nextAppointmentID = ReadAppointmentID();
+    //static int nextAppointmentID = 1; // own ID
+    
     newAppointment->AppointmentID = nextAppointmentID++;
 
     return newAppointment;

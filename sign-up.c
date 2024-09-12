@@ -28,7 +28,7 @@ void sign_up(Patient** patients,Doctor** doctors) {
 	while (!check) {
 		scanf_s("%d", &id);
 		if (id > 999 && id < 10000) {
-			if (IDcheck(patients, id)){//Check if exist another same ID
+			if (!IDcheck(patients, id)){//Check if exist another same ID
 				check = true;
 			}
 			else {
