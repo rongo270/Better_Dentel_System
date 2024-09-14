@@ -59,8 +59,6 @@ void delete_appointment(User* currentUser, int appointID) {
 
     //Only 1 appointment free and set to NULL
     if (currentUser->numberOfAppointments == 1) {
-        free(currentUser->Appointments[0]);
-        free(currentUser->Appointments);
         currentUser->Appointments = NULL;
         currentUser->numberOfAppointments = 0;
     }
